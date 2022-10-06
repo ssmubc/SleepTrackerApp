@@ -108,13 +108,18 @@ public class SleepTrackerApp {
     private void deleteSleepEntry() {
         System.out.println("Enter the day of the week that you want to delete: ");
         String dayOfTheWeek = input.next();
+        SleepModel removedSleep = null;
         for (SleepModel sleep : myLog) {
             if (sleep.getDayOfTheWeek().equals(dayOfTheWeek)) {
-                myLog.remove(sleep);
-                System.out.println("Your chosen entry has been removed from the log.");
-                viewSleepLog();
+                removedSleep = sleep;
+
             }
         }
+        if (removedSleep != null) {
+            myLog.remove(removedSleep);
+            System.out.println("Your chosen entry has been removed from the log.");
+        }
+        viewSleepLog();
     }
 
 
