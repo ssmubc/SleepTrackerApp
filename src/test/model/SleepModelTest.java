@@ -28,11 +28,6 @@ class SleepModelTest {
         assertTrue(dailySleep.getActualSleepPerDay() > 0);
     }
 
-//    @Test
-//    void testCalculateSleepDifference() {
-//        assertEquals(2.0, dailySleep.calculateSleepDifference());
-//    }
-
     @Test
     void testAddSleepModel() {
         weeklySleep.addSleepModel(dailySleep);
@@ -44,8 +39,22 @@ class SleepModelTest {
     void testRemoveSleepModel() {
         weeklySleep.addSleepModel(dailySleep);
         List<SleepModel> log = weeklySleep.getSleepPerWeek();
-        log.remove(dailySleep);
+        weeklySleep.removeSleepModel(dailySleep);
         assertFalse(log.contains(dailySleep));
+    }
+
+    @Test
+    void testEditSleepModel() {
+        SleepModel correctSleep = new SleepModel("Monday", 8.0, false);
+        List<SleepModel> log = weeklySleep.getSleepPerWeek();
+        weeklySleep.addSleepModel(dailySleep);
+        weeklySleep.editSleepModel(dailySleep, correctSleep);
+        assertTrue(log.contains(correctSleep));
+        assertFalse(log.contains(dailySleep));
+
+
+
+
     }
 
 

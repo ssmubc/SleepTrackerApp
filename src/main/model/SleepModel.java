@@ -19,10 +19,6 @@ public class SleepModel {
         //this.targetSleepPerDay = getTargetSleepPerDay();
     }
 
-    public double getTargetSleepPerDay() {
-        return targetSleepPerDay;
-    }
-
     public String getDayOfTheWeek() {
         return dayOfTheWeek;
     }
@@ -35,9 +31,6 @@ public class SleepModel {
         return actualSleepPerDay;
     }
 
-    public double calculateSleepDifference() {
-        return actualSleepPerDay - targetSleepPerDay;
-    }
 
 
 
