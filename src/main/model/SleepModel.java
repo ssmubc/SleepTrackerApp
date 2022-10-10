@@ -2,12 +2,9 @@ package model;
 
 public class SleepModel {
     // delete or rename this class!
-    private double targetSleepPerDay;
     private String dayOfTheWeek;
     private boolean examOrNot;
     private double actualSleepPerDay;
-    private double sleepDifference;
-    private double averageSleepPerWeek;
 
     // REQUIRES: dayOfTheWeek has a non-zero length, actualSleepPerDay >= 0 hours;
     // EFFECTS: actualSleepPerDay is set to sleep; a SleepModel object is created that includes
@@ -16,7 +13,6 @@ public class SleepModel {
         this.dayOfTheWeek = dayOfTheWeek;
         actualSleepPerDay = sleep;
         this.examOrNot = examOrNot;
-        //this.targetSleepPerDay = getTargetSleepPerDay();
     }
 
     public String getDayOfTheWeek() {

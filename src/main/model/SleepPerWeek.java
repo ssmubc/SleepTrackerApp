@@ -22,12 +22,19 @@ public class SleepPerWeek {
 //        }
 //    }
 
+//    public List<SleepModel> addSleepModel(SleepModel sleep) {
+//        if (!sleepPerWeek.contains(sleep)) {
+//            sleepPerWeek.add(sleep);
+//        }
+//        return sleepPerWeek;
+//    }
+
     public List<SleepModel> addSleepModel(SleepModel sleep) {
-        if (!sleepPerWeek.contains(sleep)) {
-            sleepPerWeek.add(sleep);
-        }
+        sleepPerWeek.add(sleep);
         return sleepPerWeek;
     }
+
+
 
     public List<SleepModel> getSleepPerWeek() {
         return sleepPerWeek;

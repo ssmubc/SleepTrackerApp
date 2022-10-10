@@ -28,10 +28,17 @@ class SleepModelTest {
         assertTrue(dailySleep.getActualSleepPerDay() > 0);
     }
 
+//    @Test
+//    void testAddSleepModel() {
+//        weeklySleep.addSleepModel(dailySleep);
+//        List<SleepModel> log = weeklySleep.getSleepPerWeek();
+//        assertTrue(log.contains(dailySleep));
+//    }
     @Test
     void testAddSleepModel() {
-        weeklySleep.addSleepModel(dailySleep);
         List<SleepModel> log = weeklySleep.getSleepPerWeek();
+        assertFalse(log.contains(dailySleep));
+        weeklySleep.addSleepModel(dailySleep);
         assertTrue(log.contains(dailySleep));
     }
 
