@@ -1,43 +1,38 @@
 package model;
 
 public class SleepModel {
-    // delete or rename this class!
-    private String dayOfTheWeek;
-    private boolean examOrNot;
-    private double actualSleepPerDay;
+    private String dayOfTheWeek;       // tracks the day of the week the sleep entry was created for.
+    private boolean examOrNot;         // whether there is an exam or not in the upcoming week.
+    private double actualSleepPerDay;  // the number of hours slept on that day.
 
-    // REQUIRES: dayOfTheWeek has a non-zero length, actualSleepPerDay >= 0 hours;
-    // EFFECTS: actualSleepPerDay is set to sleep; a SleepModel object is created that includes
-    // the day of the week, sleep on that day, and whether there was an exam(s) or not in the upcoming week.
+    /*
+    REQUIRES: dayOfTheWeek has a non-zero length, actualSleepPerDay >= 0 hours;
+    EFFECTS: actualSleepPerDay is set to sleep; a SleepModel object is created that includes
+    the day of the week, sleep on that day, and whether is an exam(s) or not in the upcoming week (true/false).
+     */
     public SleepModel(String dayOfTheWeek, double sleep, boolean examOrNot) {
         this.dayOfTheWeek = dayOfTheWeek;
         actualSleepPerDay = sleep;
         this.examOrNot = examOrNot;
     }
 
+
+    // getters:
+
+    // EFFECTS: returns the string, dayOfTheWeek
     public String getDayOfTheWeek() {
         return dayOfTheWeek;
     }
 
+    // EFFECTS: returns the boolean, examOrNot
     public boolean getExamOrNot() {
         return examOrNot;
     }
 
+    // EFFECTS: returns the double, actualSleepPerDay
     public double getActualSleepPerDay() {
         return actualSleepPerDay;
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

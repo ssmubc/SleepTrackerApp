@@ -9,7 +9,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SleepModelTest {
-    // delete or rename this class!
     private SleepModel dailySleep;
     private SleepPerWeek weeklySleep;
     @BeforeEach
@@ -36,13 +35,6 @@ class SleepModelTest {
         weeklySleep.addSleepModel(dailySleep);
         assertEquals(1, log.size());
     }
-//    @Test
-//    void testAddSleepModel() {
-//        List<SleepModel> log = weeklySleep.getSleepPerWeek();
-//        assertFalse(log.contains(dailySleep));
-//        weeklySleep.addSleepModel(dailySleep);
-//        assertTrue(log.contains(dailySleep));
-//    }
 
     @Test
     void testRemoveSleepModel() {
@@ -60,10 +52,6 @@ class SleepModelTest {
         weeklySleep.editSleepModel(dailySleep, correctSleep);
         assertTrue(log.contains(correctSleep));
         assertFalse(log.contains(dailySleep));
-
-
-
-
     }
 
 

@@ -7,26 +7,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+// Sleep Tracker application
 public class SleepTrackerApp {
     private SleepModel sleep;
     private Scanner input;
     private SleepPerWeek weeklyLog;
     private List<SleepModel> myLog;
     private int sleepLogNum;
-    private String yes;
-    private String no;
 
+
+    // EFFECTS: runs the Sleep Tracker application
     public SleepTrackerApp() {
         weeklyLog = new SleepPerWeek();
         myLog = new ArrayList<SleepModel>();
         runTrackerApp();
 
-
-
     }
 
+    // CITATION: studied and referenced:
+    // https://github.students.cs.ubc.ca/CPSC210/TellerApp/blob/main/src/main/ca/ubc/cpsc210/bank/ui/TellerApp.java
     // MODIFIES: this
-    // EFFECTS: processes user input (Taken from TellerApp)
+    // EFFECTS: processes user input
     public void runTrackerApp() {
         boolean shouldContinue = true;
         String userCommand = null;
@@ -47,11 +48,36 @@ public class SleepTrackerApp {
         System.out.println("\nThank you for connecting with your Sleep Pattern Tracker! See you soon!");
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes the user's command
+    private void processCommand(String command) {
+        switch (command) {
+            case "n":
+                makeNewEntry();
+                break;
+            case "v":
+                viewSleepLog();
+                break;
+            case "e":
+                editSleepEntry();
+                break;
+            case "d":
+                deleteSleepEntry();
+                break;
+            default:
+                System.out.println("Your input is not valid. Please select an option from the menu.");
+                break;
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: initializes a sleep entry
     public void initialization() {
         sleep = new SleepModel("Wednesday", 5.0, false);
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
+
 
     // EFFECTS: displays a menu of options for the user to choose from.
     public void displayMenu() {
@@ -66,31 +92,36 @@ public class SleepTrackerApp {
     // MODIFIES: this
     // EFFECTS: creates a sleep entry
     private void makeNewEntry() {
-        System.out.print("Enter the day of the week: ");
+        System.out.print("Enter the day of the week from the options (Mon, Tues, Wed, Thurs, Friday, Sat, Sunday): ");
         String dayOfTheWeek = input.next();
         System.out.println("Enter the number of hours you slept today: ");
         Double hoursOfSleep = input.nextDouble();
         System.out.println("Are there any exams coming up this week (true/false): ");
         String examOrNot = input.next();
+        if (examOrNot.equals("true") || examOrNot.equals("false")) {
+            SleepModel sleep = new SleepModel(dayOfTheWeek, hoursOfSleep, Boolean.getBoolean(examOrNot));
+            myLog.add(sleep);
+            System.out.println("Your entry has been added to your sleep log.");
+        } else {
+            System.out.println("If you have an exam this week enter: true, else enter: false for this question");
+            makeNewEntry();
+        }
+
 //        if (examOrNot.equals("yes")) {
 //            boolean hasExam = true;
 //        } else if (examOrNot.equals("no")) {
 //            boolean hasExam = false;
 //        }
 
-        SleepModel sleep = new SleepModel(dayOfTheWeek, hoursOfSleep, Boolean.getBoolean(examOrNot));
-        myLog.add(sleep);
-        System.out.println("Your entry has been added to your sleep log.");
-        //weeklyLog.addSleepModel(sleep);
+//        SleepModel sleep = new SleepModel(dayOfTheWeek, hoursOfSleep, Boolean.getBoolean(examOrNot));
+//        myLog.add(sleep);
+//        System.out.println("Your entry has been added to your sleep log.");
     }
 
 
-    // MODIFIES: this
     // EFFECTS: user views the weekly sleep log
     private void viewSleepLog() {
         System.out.println("Here is your sleep log so far: \n");
-        //System.out.println(myLog);
-
         for (SleepModel sleep : myLog) {
             sleepLogNum++;
             System.out.println("Your sleep details for your " + sleepLogNum + " log entry is: ");
@@ -119,12 +150,22 @@ public class SleepTrackerApp {
             System.out.println("Enter the correct number of hours you slept: ");
             Double correctHours = input.nextDouble();
             System.out.println("Enter whether you have exams or not this week (true/false): ");
-            String correctedNumberOfExams = input.next();
-            Boolean changeExams = Boolean.valueOf(correctedNumberOfExams);
-            SleepModel correctedSleep = new SleepModel(editSleep.getDayOfTheWeek(), correctHours,
-                     changeExams);
-            myLog.set(myLog.indexOf(editSleep), correctedSleep);
-            viewSleepLog();
+            String correctedExams = input.next();
+            if (correctedExams.equals("true") || correctedExams.equals("false")) {
+                Boolean changeExams = Boolean.valueOf(correctedExams);
+                SleepModel correctedSleep = new SleepModel(editSleep.getDayOfTheWeek(), correctHours, changeExams);
+                myLog.set(myLog.indexOf(editSleep), correctedSleep);
+                viewSleepLog();
+            } else {
+                System.out.println("If you have an exam this week enter: true, else enter: false for this question");
+                editSleepEntry();
+            }
+
+//            Boolean changeExams = Boolean.valueOf(correctedExams);
+//            SleepModel correctedSleep = new SleepModel(editSleep.getDayOfTheWeek(), correctHours,
+//                     changeExams);
+//            myLog.set(myLog.indexOf(editSleep), correctedSleep);
+//            viewSleepLog();
         }
 
 //        if (editSleep != null) {
@@ -182,27 +223,7 @@ public class SleepTrackerApp {
     }
 
 
-    // MODIFIES: this
-    // EFFECTS: processes what the user has commanded (Teller)
-    private void processCommand(String command) {
-        switch (command) {
-            case "n":
-                makeNewEntry();
-                break;
-            case "v":
-                viewSleepLog();
-                break;
-            case "e":
-                editSleepEntry();
-                break;
-            case "d":
-                deleteSleepEntry();
-                break;
-            default:
-                System.out.println("Your input is not valid. Please select an option from the menu.");
-                break;
-        }
-    }
+
 
 //    private void processCommand(String command) {
 //        if (command.equals("n")) {
