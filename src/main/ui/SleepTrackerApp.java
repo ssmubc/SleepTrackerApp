@@ -18,7 +18,7 @@ public class SleepTrackerApp {
 
     // EFFECTS: runs the Sleep Tracker application
     public SleepTrackerApp() {
-        weeklyLog = new SleepPerWeek();
+        //weeklyLog = new SleepPerWeek();
         myLog = new ArrayList<SleepModel>();
         runTrackerApp();
 
@@ -107,15 +107,6 @@ public class SleepTrackerApp {
             makeNewEntry();
         }
 
-//        if (examOrNot.equals("yes")) {
-//            boolean hasExam = true;
-//        } else if (examOrNot.equals("no")) {
-//            boolean hasExam = false;
-//        }
-
-//        SleepModel sleep = new SleepModel(dayOfTheWeek, hoursOfSleep, Boolean.getBoolean(examOrNot));
-//        myLog.add(sleep);
-//        System.out.println("Your entry has been added to your sleep log.");
     }
 
 
@@ -161,45 +152,7 @@ public class SleepTrackerApp {
                 editSleepEntry();
             }
 
-//            Boolean changeExams = Boolean.valueOf(correctedExams);
-//            SleepModel correctedSleep = new SleepModel(editSleep.getDayOfTheWeek(), correctHours,
-//                     changeExams);
-//            myLog.set(myLog.indexOf(editSleep), correctedSleep);
-//            viewSleepLog();
         }
-
-//        if (editSleep != null) {
-//            System.out.println("Would you like to edit the number of hours you slept (true/false)? ");
-//            String editHours = input.next();
-//            Boolean changeHours = Boolean.valueOf(editHours);
-//            if (changeHours) {
-//                System.out.println("Enter the correct number of hours you slept: ");
-//                Double correctHours = input.nextDouble();
-//                SleepModel correctedSleep = new SleepModel(editSleep.getDayOfTheWeek(), correctHours,
-//                        editSleep.getExamOrNot());
-//                myLog.set(myLog.indexOf(editSleep), correctedSleep);
-//                viewSleepLog();
-//            }
-
-//            System.out.println("Would you like to edit whether you have exams or not this week (true/false)");
-//            String doYouHaveExams = input.next();
-
-//            if (Boolean.valueOf(doYouHaveExams)) {
-//                System.out.println("Enter whether you have exams or not this week (true/false): ");
-//                String correctedNumberOfExams = input.next();
-//                Boolean changeExams = Boolean.valueOf(correctedNumberOfExams);
-//                SleepModel correctedSleep = new SleepModel(editSleep.getDayOfTheWeek(),
-//                        editSleep.getActualSleepPerDay(), changeExams);
-//                myLog.set(myLog.indexOf(editSleep), correctedSleep);
-//                viewSleepLog();
-//            }
-
-//            if (!Boolean.getBoolean(editHours) && !Boolean.getBoolean(doYouHaveExams)) {
-//                System.out.println("You have nothing you change! Perfect!");
-//                viewSleepLog();
-//                displayMenu();
-//            }
-        //}
 
     }
 
@@ -221,27 +174,4 @@ public class SleepTrackerApp {
         }
         viewSleepLog();
     }
-
-
-
-
-//    private void processCommand(String command) {
-//        if (command.equals("n")) {
-//            makeNewEntry();
-//        } else if (command.equals("v")) {
-//            viewSleepLog();
-//        } else if (command.equals("e")) {
-//            editSleepEntry();
-//        } else if (command.equals("d")) {
-//            deleteSleepEntry();
-//        } else {
-//            System.out.println("Your input is not valid. Please select an option from the menu.");
-//        }
-//    }
-
-
-
-
-
-
 }

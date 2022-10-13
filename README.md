@@ -38,6 +38,3 @@ get an array of objects (daily sleep pattern records) in the weekly sleep log cl
 
 
 - As a user, I want to be able to remove a sleep log entry from my weekly sleep log.
-
-
-- REMOVE later: As a user, I want to be able to mark the time of exam week, which may have affected my sleep time.
