@@ -1,5 +1,6 @@
 package model;
 
+// Daily sleep pattern entry
 public class SleepModel {
     private String dayOfTheWeek;       // tracks the day of the week the sleep entry was created for.
     private boolean examOrNot;         // whether there is an exam or not in the upcoming week.

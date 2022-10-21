@@ -38,3 +38,10 @@ get an array of objects (daily sleep pattern records) in the weekly sleep log cl
 
 
 - As a user, I want to be able to remove a sleep log entry from my weekly sleep log.
+
+P2 user stories:
+
+- As a user, I want to save the entire state of my weekly sleep log to file. 
+
+- As a user, I want to reload the state from file and continue where I had started on my weekly sleep log entry. 
+

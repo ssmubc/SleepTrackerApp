@@ -8,6 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Tests for the SleepModel and SleepPerWeek
 class SleepModelTest {
     private SleepModel dailySleep;
     private SleepPerWeek weeklySleep;

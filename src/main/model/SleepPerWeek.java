@@ -1,9 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class SleepPerWeek {
+// Creates weekly sleep pattern lists
+public class SleepPerWeek implements Writable {
 
     private List<SleepModel> sleepPerWeek;  // a log of the sleep entries throughout the week
 
@@ -43,5 +48,25 @@ public class SleepPerWeek {
     public void editSleepModel(SleepModel original, SleepModel replacement) {
         sleepPerWeek.set(sleepPerWeek.indexOf(original), replacement);
     }
+
+    @Override // ASK TA
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("thingies", sleepModelsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns sleepModels in this sleepPerWeek as a JSON array
+    private JSONArray sleepModelsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (SleepModel sleepModel : sleepPerWeek) {
+            jsonArray.put(sleepModel.toJson());
+        }
+
+        return jsonArray;
+    }
+}
 
 }
