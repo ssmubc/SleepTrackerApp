@@ -25,7 +25,7 @@ public class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderEmptySleepLog() {
-        JsonReader reader = new JsonReader("./data/testReaderEmptySleepLog.json");
+        JsonReader reader = new JsonReader("./data/testWriterEmptySleepLog.json");
         try {
             SleepPerWeek sleepPerWeek = reader.read();
             assertEquals(0, sleepPerWeek.numEntries());
@@ -36,7 +36,7 @@ public class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderGeneralSleepLog() {
-        JsonReader reader = new JsonReader("./data/testReaderGeneralSleepLog.json");
+        JsonReader reader = new JsonReader("./data/testWriterGeneralSleepLog.json");
         try {
             SleepPerWeek sleepPerWeek = reader.read();
             List<SleepModel> sleepEntries = sleepPerWeek.getSleepPerWeek();

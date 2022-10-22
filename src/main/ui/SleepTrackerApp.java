@@ -81,6 +81,7 @@ public class SleepTrackerApp {
                 break;
             case "l":
                 loadSleepEntries();
+                break;
             default:
                 System.out.println("Your input is not valid. Please select an option from the menu.");
                 break;
