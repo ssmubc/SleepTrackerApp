@@ -1,7 +1,12 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
+import java.nio.file.Watchable;
+
 // Daily sleep pattern entry
-public class SleepModel {
+public class SleepModel implements Writable {
     private String dayOfTheWeek;       // tracks the day of the week the sleep entry was created for.
     private boolean examOrNot;         // whether there is an exam or not in the upcoming week.
     private double actualSleepPerDay;  // the number of hours slept on that day.
@@ -36,4 +41,12 @@ public class SleepModel {
     }
 
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Day of the week", dayOfTheWeek);
+        json.put("Hours slept today", actualSleepPerDay);
+        json.put("Have exams coming up", examOrNot);
+        return json;
+    }
 }

@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +12,13 @@ import java.util.List;
 public class SleepPerWeek implements Writable {
 
     private List<SleepModel> sleepPerWeek;  // a log of the sleep entries throughout the week
+    private String month;
 
 
     // EFFECTS: creates an array list containing objects from the SleepModel class.
     public SleepPerWeek() {
+        LocalDateTime dateTime = LocalDateTime.now();
+        month = dateTime.getMonth().name();
         this.sleepPerWeek = new ArrayList<SleepModel>();
     }
 
@@ -34,6 +38,10 @@ public class SleepPerWeek implements Writable {
         return sleepPerWeek;
     }
 
+    public String getMonth() {
+        return month;
+    }
+
 
     // REQUIRES: sleep != null
     // MODIFIES: this
@@ -49,11 +57,18 @@ public class SleepPerWeek implements Writable {
         sleepPerWeek.set(sleepPerWeek.indexOf(original), replacement);
     }
 
+    // EFFECTS: returns number of thingies in this workroom
+    public int numEntries() {
+        return sleepPerWeek.size();
+    }
+
+
+
     @Override // ASK TA
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("name", name);
-        json.put("thingies", sleepModelsToJson());
+        json.put("Month", month);
+        json.put("Weekly sleep log", sleepModelsToJson());
         return json;
     }
 
@@ -69,4 +84,3 @@ public class SleepPerWeek implements Writable {
     }
 }
 
-}

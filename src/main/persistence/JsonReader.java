@@ -53,7 +53,7 @@ public class JsonReader {
     // EFFECTS: parses SleepModels from JSON object and adds it to SleepPerWeek
     private void addSleepModels(SleepPerWeek sleepPerWeek, JSONObject jsonObject) {
         //Category category = Category.valueOf(jsonObject.getString("Enter the day of the week from the options: "));
-        JSONArray jsonArray = jsonObject.getJSONArray("SleepModels");
+        JSONArray jsonArray = jsonObject.getJSONArray("Weekly sleep log");
         for (Object json : jsonArray) {
             JSONObject nextSleepModel = (JSONObject) json;
             addSleepModel(sleepPerWeek, nextSleepModel);
@@ -65,9 +65,9 @@ public class JsonReader {
     // EFFECTS: parses sleepModel from JSON object and adds it to sleepPerWeek
     private void addSleepModel(SleepPerWeek sleepPerWeek, JSONObject jsonObject) {
         String dayOfTheWeek =
-                jsonObject.getString("Enter the day of the week (Mon, Tues, Wed, Thurs, Friday, Sat, Sunday): ");
-        Double numOfHoursSlept = jsonObject.getDouble("Enter the number of hours you slept today: ");
-        Boolean examOrNot = jsonObject.getBoolean("Are there any exams coming up this week (true/false): ");
+                jsonObject.getString("Day of the week");
+        Double numOfHoursSlept = jsonObject.getDouble("Hours slept today");
+        Boolean examOrNot = jsonObject.getBoolean("Have exams coming up");
         SleepModel sleepModel = new SleepModel(dayOfTheWeek, numOfHoursSlept, examOrNot);
         sleepPerWeek.addSleepModel(sleepModel);
     }

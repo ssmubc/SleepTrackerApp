@@ -2,27 +2,39 @@ package ui;
 
 import model.SleepModel;
 import model.SleepPerWeek;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 // Sleep Tracker application
 public class SleepTrackerApp {
+    private static final String JSON_STORE = "./data/weeklySleep.json";
     private SleepModel sleep;
     private Scanner input;
     private SleepPerWeek weeklyLog;
-    private List<SleepModel> myLog;
+    private List<SleepModel> myLog; // change to getLog in weekly class
     private int sleepLogNum;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
 
     // EFFECTS: runs the Sleep Tracker application
-    public SleepTrackerApp() {
-        //weeklyLog = new SleepPerWeek();
+    public SleepTrackerApp() throws FileNotFoundException {
+        //input = new Scanner(System.in);
+        weeklyLog = new SleepPerWeek();
         myLog = new ArrayList<SleepModel>();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runTrackerApp();
 
     }
+
 
     // CITATION: studied and referenced:
     // https://github.students.cs.ubc.ca/CPSC210/TellerApp/blob/main/src/main/ca/ubc/cpsc210/bank/ui/TellerApp.java
@@ -64,6 +76,11 @@ public class SleepTrackerApp {
             case "d":
                 deleteSleepEntry();
                 break;
+            case "s":
+                saveSleepEntries();
+                break;
+            case "l":
+                loadSleepEntries();
             default:
                 System.out.println("Your input is not valid. Please select an option from the menu.");
                 break;
@@ -86,6 +103,8 @@ public class SleepTrackerApp {
         System.out.println("\tv -> View my weekly Sleep log");
         System.out.println("\te -> Edit a log.");
         System.out.println("\td -> Delete a sleep entry from my weekly log");
+        System.out.println("\ts -> save my weekly sleep log to file");
+        System.out.println("\tl -> load weekly sleep log from file");
         System.out.println("\tq -> quit");
     }
 
@@ -173,5 +192,28 @@ public class SleepTrackerApp {
             System.out.println("Your chosen entry has been removed from the log.");
         }
         viewSleepLog();
+    }
+
+    // EFFECTS: saves the workroom to file
+    private void saveSleepEntries() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(weeklyLog);
+            jsonWriter.close();
+            System.out.println("Saved " + weeklyLog.getMonth() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadSleepEntries() {
+        try {
+            weeklyLog = jsonReader.read();
+            System.out.println("Loaded " + weeklyLog.getMonth() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }
