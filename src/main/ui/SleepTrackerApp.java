@@ -7,7 +7,6 @@ import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -28,7 +27,6 @@ public class SleepTrackerApp {
     public SleepTrackerApp() throws FileNotFoundException {
         input = new Scanner(System.in);
         weeklyLog = new SleepPerWeek();
-        //myLog = new ArrayList<SleepModel>();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         runTrackerApp();
