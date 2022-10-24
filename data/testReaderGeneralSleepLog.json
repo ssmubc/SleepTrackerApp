@@ -1,0 +1,15 @@
+{
+    "Month": "OCTOBER",
+    "Weekly sleep log": [
+        {
+            "Hours slept today": 5.6,
+            "Have exams coming up": false,
+            "Day of the week": "Saturday"
+        },
+        {
+            "Hours slept today": 7.8,
+            "Have exams coming up": false,
+            "Day of the week": "Sunday"
+        }
+    ]
+}

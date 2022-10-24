@@ -79,7 +79,6 @@ public class SleepPerWeek implements Writable {
         for (SleepModel sleepModel : sleepPerWeek) {
             jsonArray.put(sleepModel.toJson());
         }
-
         return jsonArray;
     }
 }

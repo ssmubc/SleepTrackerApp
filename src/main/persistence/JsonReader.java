@@ -1,6 +1,5 @@
 package persistence;
 
-import model.Category;
 import model.SleepModel;
 import model.SleepPerWeek;
 import org.json.JSONArray;

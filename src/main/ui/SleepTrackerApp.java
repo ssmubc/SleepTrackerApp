@@ -26,9 +26,9 @@ public class SleepTrackerApp {
 
     // EFFECTS: runs the Sleep Tracker application
     public SleepTrackerApp() throws FileNotFoundException {
-        //input = new Scanner(System.in);
+        input = new Scanner(System.in);
         weeklyLog = new SleepPerWeek();
-        myLog = new ArrayList<SleepModel>();
+        //myLog = new ArrayList<SleepModel>();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         runTrackerApp();
@@ -44,7 +44,7 @@ public class SleepTrackerApp {
         boolean shouldContinue = true;
         String userCommand = null;
 
-        initialization();
+        //initialization();
 
         while (shouldContinue) {
             displayMenu();
@@ -87,14 +87,14 @@ public class SleepTrackerApp {
                 break;
         }
     }
-
-    // MODIFIES: this
-    // EFFECTS: initializes a sleep entry
-    public void initialization() {
-        sleep = new SleepModel("Wednesday", 5.0, false);
-        input = new Scanner(System.in);
-        input.useDelimiter("\n");
-    }
+//
+//    // MODIFIES: this
+//    // EFFECTS: initializes a sleep entry
+//    public void initialization() {
+//        sleep = new SleepModel("Wednesday", 5.0, false);
+//        input = new Scanner(System.in);
+//        input.useDelimiter("\n");
+//    }
 
 
     // EFFECTS: displays a menu of options for the user to choose from.
@@ -120,7 +120,7 @@ public class SleepTrackerApp {
         String examOrNot = input.next();
         if (examOrNot.equals("true") || examOrNot.equals("false")) {
             SleepModel sleep = new SleepModel(dayOfTheWeek, hoursOfSleep, Boolean.getBoolean(examOrNot));
-            myLog.add(sleep);
+            weeklyLog.addSleepModel(sleep);
             System.out.println("Your entry has been added to your sleep log.");
         } else {
             System.out.println("If you have an exam this week enter: true, else enter: false for this question");

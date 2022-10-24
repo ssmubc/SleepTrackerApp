@@ -3,6 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,8 @@ class SleepModelTest {
         assertEquals(6.0, dailySleep.getActualSleepPerDay());
         assertTrue(dailySleep.getExamOrNot());
         assertTrue(dailySleep.getActualSleepPerDay() > 0);
+        LocalDateTime dateTime = LocalDateTime.now();
+        assertEquals(weeklySleep.getMonth(), dateTime.getMonth().name());
     }
 
     @Test
@@ -54,6 +57,7 @@ class SleepModelTest {
         assertTrue(log.contains(correctSleep));
         assertFalse(log.contains(dailySleep));
     }
+
 
 
 

@@ -1,4 +1,8 @@
 {
     "Month": "OCTOBER",
-    "Weekly sleep log": []
+    "Weekly sleep log": [{
+        "Hours slept today": 4.5,
+        "Have exams coming up": false,
+        "Day of the week": "Sat"
+    }]
 }
