@@ -7,17 +7,14 @@ import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 import java.util.Scanner;
 
 
-// Sleep Tracker application
+// Represents the SleepPerWeek application
 public class SleepTrackerApp {
     private static final String JSON_STORE = "./data/weeklySleep.json";
-    private SleepModel sleep;
     private Scanner input;
     private SleepPerWeek weeklyLog;
-    private List<SleepModel> myLog; // change to getLog in weekly class
     private int sleepLogNum;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
@@ -42,7 +39,6 @@ public class SleepTrackerApp {
         boolean shouldContinue = true;
         String userCommand = null;
 
-        //initialization();
 
         while (shouldContinue) {
             displayMenu();
@@ -85,14 +81,6 @@ public class SleepTrackerApp {
                 break;
         }
     }
-//
-//    // MODIFIES: this
-//    // EFFECTS: initializes a sleep entry
-//    public void initialization() {
-//        sleep = new SleepModel("Wednesday", 5.0, false);
-//        input = new Scanner(System.in);
-//        input.useDelimiter("\n");
-//    }
 
 
     // EFFECTS: displays a menu of options for the user to choose from.
@@ -124,14 +112,13 @@ public class SleepTrackerApp {
             System.out.println("If you have an exam this week enter: true, else enter: false for this question");
             makeNewEntry();
         }
-
     }
 
 
     // EFFECTS: user views the weekly sleep log
     private void viewSleepLog() {
         System.out.println("Here is your sleep log so far: \n");
-        for (SleepModel sleep : myLog) {
+        for (SleepModel sleep : weeklyLog.getSleepPerWeek()) {
             sleepLogNum++;
             System.out.println("Your sleep details for your " + sleepLogNum + " log entry is: ");
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -150,7 +137,7 @@ public class SleepTrackerApp {
         System.out.println("Enter the day of the week that you want to edit");
         String dayOfTheWeek = input.next();
         SleepModel editSleep = null;
-        for (SleepModel sleep : myLog) {
+        for (SleepModel sleep : weeklyLog.getSleepPerWeek()) {
             if (sleep.getDayOfTheWeek().equals(dayOfTheWeek)) {
                 editSleep = sleep;
             }
@@ -163,7 +150,7 @@ public class SleepTrackerApp {
             if (correctedExams.equals("true") || correctedExams.equals("false")) {
                 Boolean changeExams = Boolean.valueOf(correctedExams);
                 SleepModel correctedSleep = new SleepModel(editSleep.getDayOfTheWeek(), correctHours, changeExams);
-                myLog.set(myLog.indexOf(editSleep), correctedSleep);
+                weeklyLog.getSleepPerWeek().set(weeklyLog.getSleepPerWeek().indexOf(editSleep), correctedSleep);
                 viewSleepLog();
             } else {
                 System.out.println("If you have an exam this week enter: true, else enter: false for this question");
@@ -180,14 +167,14 @@ public class SleepTrackerApp {
         System.out.println("Enter the day of the week that you want to delete: ");
         String dayOfTheWeek = input.next();
         SleepModel removedSleep = null;
-        for (SleepModel sleep : myLog) {
+        for (SleepModel sleep : weeklyLog.getSleepPerWeek()) {
             if (sleep.getDayOfTheWeek().equals(dayOfTheWeek)) {
                 removedSleep = sleep;
 
             }
         }
         if (removedSleep != null) {
-            myLog.remove(removedSleep);
+            weeklyLog.getSleepPerWeek().remove(removedSleep);
             System.out.println("Your chosen entry has been removed from the log.");
         }
         viewSleepLog();

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-// Creates weekly sleep pattern lists
+// Represents a list of weekly sleep pattern entries
 public class SleepPerWeek implements Writable {
 
     private List<SleepModel> sleepPerWeek;  // a log of the sleep entries throughout the week
@@ -64,13 +64,17 @@ public class SleepPerWeek implements Writable {
 
 
 
-    @Override // ASK TA
+    // CITATION: studied and referenced:
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // EFFECTS: creates a new Json object with the corresponding month and the weekly sleep log
+    @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("Month", month);
         json.put("Weekly sleep log", sleepModelsToJson());
         return json;
     }
+
 
     // EFFECTS: returns sleepModels in this sleepPerWeek as a JSON array
     private JSONArray sleepModelsToJson() {

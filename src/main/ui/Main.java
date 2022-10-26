@@ -2,7 +2,7 @@ package ui;
 
 import java.io.FileNotFoundException;
 
-// Runs the command-line interface
+// Runs the user interface (SleepTrackerApp)
 public class Main {
     public static void main(String[] args) {
         try {

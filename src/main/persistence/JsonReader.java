@@ -16,6 +16,8 @@ import java.util.stream.Stream;
 public class JsonReader {
     private String source;
 
+    // CITATION: studied and referenced:
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // EFFECTS: constructs a reader to read from the source file
     public JsonReader(String source) {
         this.source = source;

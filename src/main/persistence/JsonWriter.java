@@ -7,11 +7,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+// Represents a writer that writes JSON representation of SleepPerWeek to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
     private String destination;
 
+
+    // CITATION: studied and referenced:
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // EFFECTS: constructs writer to write to destination file
     public JsonWriter(String destination) {
         this.destination = destination;

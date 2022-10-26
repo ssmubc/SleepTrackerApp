@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+// Tests for JsonReader
 public class JsonReaderTest extends JsonTest {
 
     @Test
@@ -32,23 +32,11 @@ public class JsonReaderTest extends JsonTest {
             assertEquals(0, sleepPerWeek.numEntries());
             LocalDateTime dateTime = LocalDateTime.now();
             assertEquals(sleepPerWeek.getMonth(), dateTime.getMonth().name());
-            //assertEquals();
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
     }
 
-//    @Test
-//    void testReaderEmptyWorkRoom() {
-//        JsonReader reader = new JsonReader("./data/testReaderEmptyWorkRoom.json");
-//        try {
-//            WorkRoom wr = reader.read();
-//            assertEquals("My work room", wr.getName());
-//            assertEquals(0, wr.numThingies());
-//        } catch (IOException e) {
-//            fail("Couldn't read from file");
-//        }
-//    }
 
     @Test
     void testReaderGeneralSleepLog() {
