@@ -45,3 +45,6 @@ Phase 2 user stories:
 
 - As a user, I want to reload the state from file and continue where I had started on my weekly sleep log entry. 
 
+CITATION: studied and referenced:
+https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+https://github.students.cs.ubc.ca/CPSC210/TellerApp/blob/main/src/main/ca/ubc/cpsc210/bank/ui/TellerApp.java

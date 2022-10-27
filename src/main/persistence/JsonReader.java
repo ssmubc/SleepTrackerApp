@@ -53,7 +53,6 @@ public class JsonReader {
     // MODIFIES: sleepPerWeek
     // EFFECTS: parses SleepModels from JSON object and adds it to SleepPerWeek
     private void addSleepModels(SleepPerWeek sleepPerWeek, JSONObject jsonObject) {
-        //Category category = Category.valueOf(jsonObject.getString("Enter the day of the week from the options: "));
         JSONArray jsonArray = jsonObject.getJSONArray("Weekly sleep log");
         for (Object json : jsonArray) {
             JSONObject nextSleepModel = (JSONObject) json;

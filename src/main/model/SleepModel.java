@@ -20,7 +20,6 @@ public class SleepModel implements Writable {
         this.examOrNot = examOrNot;
     }
 
-
     // getters:
 
     // EFFECTS: returns the string, dayOfTheWeek
