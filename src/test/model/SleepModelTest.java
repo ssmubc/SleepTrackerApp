@@ -16,9 +16,7 @@ class SleepModelTest {
     @BeforeEach
     void runBefore() {
         dailySleep = new SleepModel("Monday", 6.0, true);
-        double targetSleepPerDay = 8.0;
         weeklySleep = new SleepPerWeek();
-        ArrayList<SleepModel> log = new ArrayList<SleepModel>();
     }
 
     @Test
@@ -56,6 +54,23 @@ class SleepModelTest {
         weeklySleep.editSleepModel(dailySleep, correctSleep);
         assertTrue(log.contains(correctSleep));
         assertFalse(log.contains(dailySleep));
+    }
+
+    // ADDED NOV 9
+    @Test
+    void testhoursWithoutExam() {
+        SleepModel correctSleep = new SleepModel("Monday", 8.0, false);
+        weeklySleep.addSleepModel(dailySleep);
+        weeklySleep.addSleepModel(correctSleep);
+        assertEquals(8.0, weeklySleep.hoursWithoutExam());
+    }
+
+    @Test
+    void testhoursWithExam() {
+        SleepModel correctSleep = new SleepModel("Monday", 8.0, false);
+        weeklySleep.addSleepModel(dailySleep);
+        weeklySleep.addSleepModel(correctSleep);
+        assertEquals(6.0, weeklySleep.hoursWithExam());
     }
 
 

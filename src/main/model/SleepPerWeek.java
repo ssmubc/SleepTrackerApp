@@ -14,6 +14,9 @@ public class SleepPerWeek implements Writable {
     private List<SleepModel> sleepPerWeek;  // a log of the sleep entries throughout the week
     private String month;
 
+    // Added nov 9
+    List<String> entries;
+
 
     // EFFECTS: creates an array list containing objects from the SleepModel class.
     public SleepPerWeek() {
@@ -50,6 +53,18 @@ public class SleepPerWeek implements Writable {
         sleepPerWeek.remove(sleep);
     }
 
+
+    // added on Nov 9
+    public Boolean removeSleepModel(int index) {
+        if (index < sleepPerWeek.size()) {
+            sleepPerWeek.remove(index);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     // REQUIRES: original != null
     // MODIFIES: this
     // EFFECTS: replace a sleep entry in the log with another sleep entry.
@@ -60,6 +75,37 @@ public class SleepPerWeek implements Writable {
     // EFFECTS: returns number of thingies in this workroom
     public int numEntries() {
         return sleepPerWeek.size();
+    }
+
+
+//    // ADDED NOV 9
+//    public List<String> makeEntries(int index) {
+//        String entry = "Day: " + sleepPerWeek.get(index).getActualSleepPerDay() + "Number of hours slept: " +
+//        sleepPerWeek.get(index).getActualSleepPerDay()
+//                + "Had an exam: " + sleepPerWeek.get(index).getExamOrNot() + ""
+//    }
+
+
+
+    // ADDED NOV 9th
+    public double hoursWithoutExam() {
+        double hours = 0;
+        for (SleepModel sleep : sleepPerWeek) {
+            if (!sleep.getExamOrNot()) {
+                hours += sleep.getActualSleepPerDay();
+            }
+        }
+        return hours;
+    }
+
+    public double hoursWithExam() {
+        double hours = 0;
+        for (SleepModel sleep : sleepPerWeek) {
+            if (sleep.getExamOrNot()) {
+                hours += sleep.getActualSleepPerDay();
+            }
+        }
+        return hours;
     }
 
 
