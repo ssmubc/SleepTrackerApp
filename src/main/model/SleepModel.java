@@ -3,11 +3,14 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.util.List;
+
 // Represents a daily sleep pattern entry
 public class SleepModel implements Writable {
     private String dayOfTheWeek;       // tracks the day of the week the sleep entry was created for.
     private boolean examOrNot;         // whether there is an exam or not in the upcoming week.
     private double actualSleepPerDay;  // the number of hours slept on that day.
+
 
     /*
     REQUIRES: dayOfTheWeek has a non-zero length, actualSleepPerDay >= 0 hours;
@@ -36,6 +39,7 @@ public class SleepModel implements Writable {
     public double getActualSleepPerDay() {
         return actualSleepPerDay;
     }
+    
 
 
     // CITATION: studied and referenced:

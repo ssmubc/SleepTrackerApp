@@ -25,6 +25,13 @@ public class JsonReader {
 
     // EFFECTS: reads SleepPerWeek from the file and returns it
     // throws IOException if an error occurs reading data from file
+
+//    public SleepPerWeek read(File file) throws IOException {
+//        String jsonData = readFile(source);
+//        JSONObject jsonObject = new JSONObject(jsonData);
+//        return parseSleepPerWeek(jsonObject);
+//    }
+
     public SleepPerWeek read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);

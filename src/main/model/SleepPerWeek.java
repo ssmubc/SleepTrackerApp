@@ -14,8 +14,6 @@ public class SleepPerWeek implements Writable {
     private List<SleepModel> sleepPerWeek;  // a log of the sleep entries throughout the week
     private String month;
 
-    // Added nov 9
-    List<String> entries;
 
 
     // EFFECTS: creates an array list containing objects from the SleepModel class.
@@ -34,6 +32,13 @@ public class SleepPerWeek implements Writable {
         }
         return sleepPerWeek;
     }
+//    public List<SleepModel> addSleepModel(SleepModel sleep) {
+//        if (sleep != null) {
+//            sleepPerWeek.add(sleep);
+//
+//        }
+//        return sleepPerWeek;
+//    }
 
 
     // EFFECTS: returns the sleepPerWeek list.
@@ -63,6 +68,19 @@ public class SleepPerWeek implements Writable {
             return false;
         }
     }
+
+    // EFFECTS: lists all the cars in list and their respective details
+    public String getSleepEntries() {
+        String entries = "";
+        for (int i = 0; i < sleepPerWeek.size(); i++) {
+            entries += "Sleep Entry #" + (i + 1) + "\n" + sleepPerWeek.get(i).getDayOfTheWeek()
+                    + "\n" + sleepPerWeek.get(i).getActualSleepPerDay() + "\n"
+                    + sleepPerWeek.get(i).getExamOrNot() + "\n" + "\n";
+        }
+        return entries;
+    }
+
+
 
 
     // REQUIRES: original != null
@@ -132,4 +150,3 @@ public class SleepPerWeek implements Writable {
         return jsonArray;
     }
 }
-

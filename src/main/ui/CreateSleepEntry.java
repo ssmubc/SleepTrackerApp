@@ -2,6 +2,8 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class CreateSleepEntry {
     JFrame frame;
@@ -9,23 +11,27 @@ public class CreateSleepEntry {
     JTextField dayOfWeek;
     JTextField hoursSlept;
     JTextField exam;
+    JTextArea workload;
     JLabel dayOfWeekLabel;
     JLabel hoursSleptLabel;
     JLabel examOrNotLabel;
+    JLabel workloadLabel;
     JScrollPane scrollPane;
 
     public CreateSleepEntry() {
         userPrompts();
-//        panel.add(dayOfWeekLabel);
-//        panel.add(dayOfWeek);
-//        panel.add(hoursSleptLabel);
-//        panel.add(hoursSlept);
+        panel.add(dayOfWeekLabel);
+        panel.add(dayOfWeek);
+        panel.add(hoursSleptLabel);
+        panel.add(hoursSlept);
 //        panel.add(examOrNotLabel);
 //        panel.add(exam);
+        panel.add(workloadLabel);
+        panel.add(scrollPane);
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setMinimumSize(new Dimension(250, 200));
-        panel.setPreferredSize(new Dimension(250, 200)); // DO I need this try removing it later.
+        panel.setMinimumSize(new Dimension(550, 500));
+        panel.setPreferredSize(new Dimension(550, 500)); // DO I need this try removing it later.
 
     }
 
@@ -41,15 +47,19 @@ public class CreateSleepEntry {
         dayOfWeek.setMaximumSize(new Dimension(300, 25));
         hoursSlept = new JTextField();
         hoursSlept.setMaximumSize(new Dimension(300, 25));
+        exam = new JTextField();
+        exam.setMaximumSize(new Dimension(300, 25));
 
-        scrollPane = new JScrollPane(hoursSlept);
+        workload = new JTextArea();
+        workload.setLineWrap(true);
+        scrollPane = new JScrollPane(workload);
 
-        panel.add(dayOfWeekLabel);
-        panel.add(dayOfWeek);
-        panel.add(hoursSleptLabel);
-        panel.add(hoursSlept);
-        //panel.add(examOrNotLabel);
-        //panel.add(exam);
+//        panel.add(dayOfWeekLabel);
+//        panel.add(dayOfWeek);
+//        panel.add(hoursSleptLabel);
+//        panel.add(hoursSlept);
+//        //panel.add(examOrNotLabel);
+//        //panel.add(exam);
 
     }
 
@@ -75,7 +85,9 @@ public class CreateSleepEntry {
     }
 
 
-
-
+    public List<String> parseAndReturnWorkloadList() {
+        String workloadString = workload.getText();
+        return Arrays.asList(workloadString.split(","));
+    }
 }
 

@@ -15,11 +15,13 @@
 
 package ui;
 
+import javax.swing.*;
+
 // represents the main program execution class
 public class Main {
 
     //EFFECTS: runs the graphical user interface
     public static void main(String[] args) {
-        new MyGui();
+        new WithPopUp();
     }
 }
