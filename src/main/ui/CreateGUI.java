@@ -6,14 +6,25 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicButtonListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 
-public class WithPopUp extends JFrame implements ActionListener {
 
+// CITATIONS: https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ButtonDemoProject/src/components/
+// ButtonDemo.java
+// https://docs.oracle.com/javase/tutorial/uiswing/examples/components/RadioButtonDemoProject/src/components/
+// RadioButtonDemo.java
+// https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ButtonHtmlDemoProject/src/components/
+// ButtonHtmlDemo.java
+// https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ButtonDemoProject/src/components/ButtonDemo.java
+// https://docs.oracle.com/javase/tutorial/uiswing/examples/components/LabelDemoProject/src/components/LabelDemo.java
+
+// Creates a GUI application for user to track their sleep entries
+public class CreateGUI extends JFrame implements ActionListener {
+
+    // Json file that will save entries
     private static final String JSON_STORE = "./data/weeklySleep.json";
 
     private SleepPerWeek sleepPerWeek;
@@ -30,15 +41,12 @@ public class WithPopUp extends JFrame implements ActionListener {
     private JPanel sleepEntriesPanel;
     private JLabel entries;
 
-    private JPanel entriesPage;
-    private JButton addSleep;
     private String dayOfWeek;
     private double hoursSlept;
     private boolean examOrNot;
 
-
-    // Makes a new JFrame with different attributes
-    public WithPopUp() {
+    // EFFECTS: constructs a JFrame as the welcome page with buttons and an image
+    public CreateGUI() {
         super("Welcome to your sleep tracker!");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(600, 500));
@@ -57,18 +65,23 @@ public class WithPopUp extends JFrame implements ActionListener {
 
         mainMenu.setVisible(true);
 
+
+        //sleepPerWeek = new SleepPerWeek();
+
     }
 
-    // EFFECTS: Makes the main menu panel and changes the background color
+    // MODIFIES: this
+    // EFFECTS: creates the main menu and sets the background color
     public void initializeMenu() {
         mainMenu = new JPanel();
         mainMenu.setBackground(Color.white);
         add(mainMenu);
         entries = new JLabel();
-        entries.setText("Please add your sleep entries");
+        entries.setText("Please enter your sleep entries");
     }
 
-    // EFFECTS: Initializes main menu buttons and gives them labels
+    // MODIFIES: this
+    // EFFECTS: sets the buttons on the menu with their labels
     public void initializeMenuButtons() {
         button1 = new JButton("View current entries");
         button2 = new JButton("Add your sleep entry");
@@ -87,11 +100,11 @@ public class WithPopUp extends JFrame implements ActionListener {
 
     // MODIFIES: this
     // EFFECTS: adds buttons to mainMenu
-    public void addButton(JButton button1, JPanel panel) {
-        button1.setFont(new Font("Arial", Font.BOLD, 12));
-        button1.setForeground(Color.black);
-        button1.setBackground(Color.white);
-        panel.add(button1);
+    public void addButton(JButton b1, JPanel panel) {
+        b1.setFont(new Font("Arial", Font.BOLD, 12));
+        b1.setForeground(Color.black);
+        b1.setBackground(Color.white);
+        panel.add(b1);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
@@ -99,13 +112,13 @@ public class WithPopUp extends JFrame implements ActionListener {
     }
 
 
-    // EFFECTS: Creates a button and adds it to the given panel, changing various attributes of the
+    // MODIFIES: this
+    // EFFECTS: creates a button and adds it to the given panel, changing various attributes of the
     //          color and text of the button
     public void addMenuButton(JButton button1, JPanel panel) {
         button1.setFont(new Font("Arial", Font.BOLD, 12));
-        button1.setBackground(Color.white);
-        //button1.setPreferredSize(new Dimension(500, 3));
         button1.setForeground(Color.black);
+        button1.setBackground(Color.white);
         panel.add(button1);
         pack();
         setLocationRelativeTo(null);
@@ -114,6 +127,10 @@ public class WithPopUp extends JFrame implements ActionListener {
     }
 
 
+    // CITATION: https://media.istockphoto.com/id/1254563127/vector/man-sleeping-guy-lies-on-bed-under-duvet-at-night-
+    // comfortable-sleep-time-at-home-vector-flat.jpg?s=1024x1024&w=is&k=20&c=3qtPhIy_uNABI78QwkB-7Z3FSRuD6ACzmm
+    // XM2RI7HHE=
+    // MODIFIES: this
     // EFFECTS: Creates the image on the main menu and its it to the panel
     public void addImageToLabel(JLabel label) {
         label.setIcon(new ImageIcon("./data/sleepingBackground.jpg"));
@@ -122,7 +139,7 @@ public class WithPopUp extends JFrame implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: Sets each button to their respective action
+    // EFFECTS: sets each button to their respective action
     public void addActionToButton() {
 
         button1.addActionListener(this);
@@ -141,6 +158,7 @@ public class WithPopUp extends JFrame implements ActionListener {
     }
 
 
+    // MODIFIES: this
     // EFFECTS: calls the given methods when a certain button is clicked on
     public void actionPerformed(ActionEvent ae) {
         if (ae.getActionCommand().equals("View entries")) {
@@ -148,7 +166,7 @@ public class WithPopUp extends JFrame implements ActionListener {
         } else if (ae.getActionCommand().equals("Add your entries")) {
             createEntriesPage();
         } else if (ae.getActionCommand().equals("Delete your entry")) {
-            removeSleepEntry();
+            removeSleepEntry(sleep);
         } else if (ae.getActionCommand().equals("Save entries file")) {
             saveSleepEntries();
         } else if (ae.getActionCommand().equals("Exit application")) {
@@ -159,82 +177,50 @@ public class WithPopUp extends JFrame implements ActionListener {
             loadSleepEntries();
         }
     }
-//    else if (ae.getActionCommand().equals("Add Sleep to entries")) {
-//        createEntriesPage();
-//    }
-
 
     // CITATION: https://www.youtube.com/watch?v=arcTW_znJYY
+    // MODIFIES: this
+    // EFFECTS: allows the user to input their sleep entry and adds it to SleepPerWeek, and prints it on
+    // the sleepEntriesPanel.
     public void createEntriesPage() {
-
-//        addSleep = new JButton("Add Sleep to entries");
-//        addSleep.setActionCommand("Add Sleep to entries");
-//        addSleep.addActionListener(this);
-
-        //SleepPerWeek sleepPerWeek1 = new SleepPerWeek();
-
-
-
         String response;
         response = JOptionPane.showInputDialog("Enter day of the week:");
         dayOfWeek = response;
 
-//        if (response.equals(JOptionPane.CANCEL_OPTION)) {
-//            System.exit(0);
-//            //System.out.println("Cancel is pressed");
-//        }
         try {
             response = JOptionPane.showInputDialog("Enter number of hours slept:");
-            hoursSlept = Double.parseDouble(response);
+            if (response != null) {
+                hoursSlept = Double.parseDouble(response);
+            }
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             System.out.println("Invalid input, please try again");
             createEntriesPage();
         }
 
         response = JOptionPane.showInputDialog("Enter if you have an exam soon:");
-        examOrNot = Boolean.parseBoolean(response);
+        if (response != null) {
+            examOrNot = Boolean.parseBoolean(response);
+        }
+
 
         sleep = new SleepModel(dayOfWeek, hoursSlept, examOrNot);
         sleepPerWeek.addSleepModel(sleep);
-        //sleepPerWeek = sleepPerWeek1;
         entries.setText("<html><pre>Current entry: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
         System.out.println("Successfully added!!");
-
-
-
-
+        System.out.println(sleepPerWeek.getSleepPerWeek());
 
     }
 
-//    public void makeYourSleepPanel() {
-//        entriesPage = new JPanel(new GridLayout(0, 2));
-//        JButton mainMenuButton = new JButton("Return to Main Menu");
-//
-//        mainMenuButton.setBackground(Color.WHITE);
-//        mainMenuButton.setFont(new Font("Arial", Font.BOLD, 10));
-//        mainMenuButton.setForeground(Color.black);
-//
-//        mainMenuButton.setActionCommand("Return to main menu");
-//        mainMenuButton.addActionListener(this);
-//        addMenuButton(mainMenuButton, entriesPage);
-//        //addButton(mainMenuButton, entriesPage);
-//        createEntriesPage();
-//    }
 
+    // EFFECTS: makes the sleepEntriesPanel visible and mainMenu non-visible.
     public void initializeSleepEntriesPanel() {
         add(sleepEntriesPanel);
         sleepEntriesPanel.setVisible(true);
         mainMenu.setVisible(false);
-        //sleepEntriesPanel.setVisible(false);
     }
 
-//   public void initializeSleepModelPanel() {
-//        add(sleepEntriesPanel);
-//        sleepEntriesPanel.setVisible(true);
-//        mainMenu.setVisible(false);
-//        entriesPage.setVisible(false);
-//    }
 
+    // EFFECTS: makes the panel with all the sleep entries listed. Sets the return to menu button and scrollbar.
     public void makeSleepEntriesPanel() {
         sleepEntriesPanel = new JPanel(new GridLayout(0, 1));
         JScrollPane scroll = new JScrollPane(entries, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -245,22 +231,25 @@ public class WithPopUp extends JFrame implements ActionListener {
         mainMenuButton.setActionCommand("Return to main menu");
         mainMenuButton.addActionListener(this);
         addMenuButton(mainMenuButton, sleepEntriesPanel);
-        mainMenuButton.setForeground(Color.BLACK);
+        //mainMenuButton.setForeground(Color.BLACK);
 
         entries.setFont(new Font("ComicSans", Font.BOLD, 12));
         sleepEntriesPanel.add(scroll);
 
     }
 
-    public void removeSleepEntry() {
-
+    // MODIFIES: this
+    // EFFECTS: removes an entry from the list of entries after the user provides the day of the entry.
+    // If an entry with the day of the week is made then it will delete that entry otherwise it will not.
+    public void removeSleepEntry(SleepModel sleep) {
         try {
+            // Does not run if a new entry has not been added in this run time. Fix this.
             String response;
             response = JOptionPane.showInputDialog("Which day of the week do you want to remove");
             SleepModel sleep2 = new SleepModel("", 0, false);
-            for (SleepModel sleep : sleepPerWeek.getSleepPerWeek()) {
+            for (SleepModel sleep1 : sleepPerWeek.getSleepPerWeek()) {
                 if (sleep.getDayOfTheWeek().equals(response)) {
-                    sleep2 = sleep;
+                    sleep2 = sleep1;
                 }
             }
             if (!sleep2.getDayOfTheWeek().equals("")) {
@@ -276,9 +265,23 @@ public class WithPopUp extends JFrame implements ActionListener {
         } catch (IndexOutOfBoundsException e) {
             entries.setText("Please initialize entries file before proceeding");
         }
+
+//        try {
+//            sleepPerWeek.removeSleepModel(sleep);
+//            entries.setText("<html><pre>Current entries: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
+//            System.out.println("The sleep entries is no longer existing");
+//        } catch (NullPointerException e) {
+//            System.out.println("Please add a sleep before attempting to remove it");
+//        } catch (IndexOutOfBoundsException e) {
+//            entries.setText("Please initialize entries file before proceeding");
+//        }
     }
 
 
+    // CITATION: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/master/src/main/ui/
+    // CITATION: https://www.freecodecamp.org/news/pre-tag-in-html-example-code/
+    // MODIFIES: this
+    // EFFECTS: loads the entries from the json file.
     private void loadSleepEntries() {
         try {
             JsonReader reader = new JsonReader(JSON_STORE);
@@ -292,34 +295,28 @@ public class WithPopUp extends JFrame implements ActionListener {
         }
     }
 
-    // https://www.youtube.com/watch?v=PQBT52o81pI
+    // CITATION: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/master/src/main/ui/
+    // EFFECTS: saves the entries to the json file
     private void saveSleepEntries() {
         try {
             //FileOutputStream
             JsonWriter writer = new JsonWriter(JSON_STORE);
+            writer.open();
             writer.write(sleepPerWeek);
             writer.close();
             System.out.println("Sleep entries saved to file " + JSON_STORE);
         } catch (NullPointerException e) {
             System.out.println("NullPointerException");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
-//    private void saveSleepEntries() {
-//        try {
-//            JsonWriter writer = new JsonWriter(JSON_STORE);
-//            writer.write(sleepPerWeek);
-//            writer.close();
-//            System.out.println("Sleep entries saved to file " + JSON_STORE);
-//        } catch (NullPointerException e) {
-//            System.out.println("You need to load the file first");
-//        }
-//    }
 
+    // EFFECTS: Makes the main menu visible and the other panel, non-visible
     public void returnToMainMenu() {
         mainMenu.setVisible(true);
         sleepEntriesPanel.setVisible(false);
-        //entriesPage.setVisible(false);
     }
 
 }

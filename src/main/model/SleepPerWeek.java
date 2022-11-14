@@ -73,9 +73,9 @@ public class SleepPerWeek implements Writable {
     public String getSleepEntries() {
         String entries = "";
         for (int i = 0; i < sleepPerWeek.size(); i++) {
-            entries += "Sleep Entry #" + (i + 1) + "\n" + sleepPerWeek.get(i).getDayOfTheWeek()
-                    + "\n" + sleepPerWeek.get(i).getActualSleepPerDay() + "\n"
-                    + sleepPerWeek.get(i).getExamOrNot() + "\n" + "\n";
+            entries += "Sleep Entry #" + (i + 1) + "\n" + "Day of the week: " + sleepPerWeek.get(i).getDayOfTheWeek()
+                    + "\n" + "Hours slept today: " + sleepPerWeek.get(i).getActualSleepPerDay() + "\n"
+                    + "Have exams coming up: " + sleepPerWeek.get(i).getExamOrNot() + "\n" + "\n";
         }
         return entries;
     }
