@@ -98,7 +98,8 @@ public class SleepTrackerApp {
     // MODIFIES: this
     // EFFECTS: creates a sleep entry
     private void makeNewEntry() {
-        System.out.print("Enter the day of the week from the options (Mon, Tues, Wed, Thurs, Friday, Sat, Sunday): ");
+        System.out.print("Enter the day of the week from the options "
+                + "(Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday): ");
         String dayOfTheWeek = input.next();
         System.out.println("Enter the number of hours you slept today: ");
         Double hoursOfSleep = input.nextDouble();

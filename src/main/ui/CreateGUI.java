@@ -166,7 +166,7 @@ public class CreateGUI extends JFrame implements ActionListener {
         } else if (ae.getActionCommand().equals("Add your entries")) {
             createEntriesPage();
         } else if (ae.getActionCommand().equals("Delete your entry")) {
-            removeSleepEntry(sleep);
+            removeSleepEntry();
         } else if (ae.getActionCommand().equals("Save entries file")) {
             saveSleepEntries();
         } else if (ae.getActionCommand().equals("Exit application")) {
@@ -179,35 +179,80 @@ public class CreateGUI extends JFrame implements ActionListener {
     }
 
     // CITATION: https://www.youtube.com/watch?v=arcTW_znJYY
+    // CITATION: http://www.java2s.com/Tutorial/Java/0240__Swing/UsingJOptionPanewithapredefinedselections.htm
     // MODIFIES: this
     // EFFECTS: allows the user to input their sleep entry and adds it to SleepPerWeek, and prints it on
     // the sleepEntriesPanel.
     public void createEntriesPage() {
-        String response;
-        response = JOptionPane.showInputDialog("Enter day of the week:");
-        dayOfWeek = response;
+        String hours;
+//        response = JOptionPane.showInputDialog("Enter day of the week:");
+//        dayOfWeek = response;
 
+        Object[] selectionValues = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        String initialSelection = "Sunday";
+        Object selection = JOptionPane.showInputDialog(null, "Enter day of the week:",
+                "Day of the week", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+        dayOfWeek = String.valueOf(selection);
+
+//
         try {
-            response = JOptionPane.showInputDialog("Enter number of hours slept:");
-            if (response != null) {
-                hoursSlept = Double.parseDouble(response);
+            hours = JOptionPane.showInputDialog("Enter number of hours slept:");
+            if (hours != null) {
+                hoursSlept = Double.parseDouble(hours);
             }
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             System.out.println("Invalid input, please try again");
             createEntriesPage();
         }
 
-        response = JOptionPane.showInputDialog("Enter if you have an exam soon:");
-        if (response != null) {
-            examOrNot = Boolean.parseBoolean(response);
-        }
+        // DO I NEED THIS PARENT COMPONENT TO BE NULL?
+        Object[] selectionValues2 = {"true", "false"};
+        String initialSelection2 = "false";
+        Object selection2 = JOptionPane.showInputDialog(null, "Enter day of the week:",
+                "Exams coming up", JOptionPane.QUESTION_MESSAGE, null, selectionValues2, initialSelection2);
+        examOrNot = Boolean.parseBoolean(selection2.toString());
 
 
+//
+//        response = JOptionPane.showInputDialog("Enter if you have an exam soon:");
+//        if (response != null) {
+//            examOrNot = Boolean.parseBoolean(response);
+//        }
+//
+//
         sleep = new SleepModel(dayOfWeek, hoursSlept, examOrNot);
         sleepPerWeek.addSleepModel(sleep);
         entries.setText("<html><pre>Current entry: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
         System.out.println("Successfully added!!");
         System.out.println(sleepPerWeek.getSleepPerWeek());
+
+        // BELOW IS WORKING SOLUTION
+
+//        String response;
+//        response = JOptionPane.showInputDialog("Enter day of the week:");
+//        dayOfWeek = response;
+//
+//        try {
+//            response = JOptionPane.showInputDialog("Enter number of hours slept:");
+//            if (response != null) {
+//                hoursSlept = Double.parseDouble(response);
+//            }
+//        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+//            System.out.println("Invalid input, please try again");
+//            createEntriesPage();
+//        }
+//
+//        response = JOptionPane.showInputDialog("Enter if you have an exam soon:");
+//        if (response != null) {
+//            examOrNot = Boolean.parseBoolean(response);
+//        }
+//
+//
+//        sleep = new SleepModel(dayOfWeek, hoursSlept, examOrNot);
+//        sleepPerWeek.addSleepModel(sleep);
+//        entries.setText("<html><pre>Current entry: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
+//        System.out.println("Successfully added!!");
+//        System.out.println(sleepPerWeek.getSleepPerWeek());
 
     }
 
@@ -241,41 +286,56 @@ public class CreateGUI extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS: removes an entry from the list of entries after the user provides the day of the entry.
     // If an entry with the day of the week is made then it will delete that entry otherwise it will not.
-    public void removeSleepEntry(SleepModel sleep) {
+    public void removeSleepEntry() {
         try {
-            // Does not run if a new entry has not been added in this run time. Fix this.
             String response;
-            response = JOptionPane.showInputDialog("Which day of the week do you want to remove");
+            Object[] selectionValues = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+            String initialSelection = "Sunday";
+            Object selection = JOptionPane.showInputDialog(null,
+                    "Which day of the week do you want to remove",
+                    "Remove an entry", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+            response = String.valueOf(selection);
             SleepModel sleep2 = new SleepModel("", 0, false);
-            for (SleepModel sleep1 : sleepPerWeek.getSleepPerWeek()) {
+            for (SleepModel sleep : sleepPerWeek.getSleepPerWeek()) {
                 if (sleep.getDayOfTheWeek().equals(response)) {
-                    sleep2 = sleep1;
+                    sleep2 = sleep;
                 }
             }
             if (!sleep2.getDayOfTheWeek().equals("")) {
-                sleepPerWeek.removeSleepModel(sleep);
+                sleepPerWeek.removeSleepModel(sleep2);
                 entries.setText("<html><pre>Current entries: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
                 System.out.println("The sleep entries is no longer existing");
             } else {
                 System.out.println("There is no entry for " + response);
             }
-
-        } catch (NullPointerException e) {
-            System.out.println("Please add a sleep before attempting to remove it");
         } catch (IndexOutOfBoundsException e) {
-            entries.setText("Please initialize entries file before proceeding");
+            entries.setText("Please provide a valid input");
         }
+    }
 
-//        try {
-//            sleepPerWeek.removeSleepModel(sleep);
+    // Previous remove function working but no scroll options
+//            try {
+//        String response;
+//        response = JOptionPane.showInputDialog("Which day of the week do you want to remove");
+//        SleepModel sleep2 = new SleepModel("", 0, false);
+//        for (SleepModel sleep : sleepPerWeek.getSleepPerWeek()) {
+//            if (sleep.getDayOfTheWeek().equals(response)) {
+//                sleep2 = sleep;
+//            }
+//        }
+//        if (!sleep2.getDayOfTheWeek().equals("")) {
+//            sleepPerWeek.removeSleepModel(sleep2);
 //            entries.setText("<html><pre>Current entries: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
 //            System.out.println("The sleep entries is no longer existing");
-//        } catch (NullPointerException e) {
-//            System.out.println("Please add a sleep before attempting to remove it");
-//        } catch (IndexOutOfBoundsException e) {
-//            entries.setText("Please initialize entries file before proceeding");
+//        } else {
+//            System.out.println("There is no entry for " + response);
 //        }
-    }
+//    } catch (IndexOutOfBoundsException e) {
+//        entries.setText("Please provide a valid input");
+//    }
+
+
+
 
 
     // CITATION: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/master/src/main/ui/
@@ -304,10 +364,8 @@ public class CreateGUI extends JFrame implements ActionListener {
             writer.write(sleepPerWeek);
             writer.close();
             System.out.println("Sleep entries saved to file " + JSON_STORE);
-        } catch (NullPointerException e) {
-            System.out.println("NullPointerException");
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (IOException e) {
+            System.out.println("Could not save to file.");
         }
     }
 
