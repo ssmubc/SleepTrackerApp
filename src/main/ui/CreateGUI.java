@@ -299,7 +299,6 @@ public class CreateGUI extends JFrame implements ActionListener {
     // EFFECTS: saves the entries to the json file
     private void saveSleepEntries() {
         try {
-            //FileOutputStream
             JsonWriter writer = new JsonWriter(JSON_STORE);
             writer.open();
             writer.write(sleepPerWeek);

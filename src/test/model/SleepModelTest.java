@@ -56,22 +56,53 @@ class SleepModelTest {
         assertFalse(log.contains(dailySleep));
     }
 
-    // ADDED NOV 9
+
     @Test
-    void testhoursWithoutExam() {
-        SleepModel correctSleep = new SleepModel("Monday", 8.0, false);
+    void testRemoveSleepModelWithIndex() {
         weeklySleep.addSleepModel(dailySleep);
-        weeklySleep.addSleepModel(correctSleep);
-        assertEquals(8.0, weeklySleep.hoursWithoutExam());
+        SleepModel model2 = new SleepModel("Tuesday", 8.0, false);
+        SleepModel model3 = new SleepModel("Friday", 2.0, true);
+        weeklySleep.addSleepModel(model2);
+        weeklySleep.addSleepModel(model3);
+        assertTrue(weeklySleep.removeSleepModel(0));
+        assertFalse(weeklySleep.getSleepPerWeek().contains(dailySleep));
+        assertTrue(weeklySleep.getSleepPerWeek().contains(model2));
+        assertTrue(weeklySleep.getSleepPerWeek().contains(model3));
+        assertFalse(weeklySleep.removeSleepModel(10));
     }
 
     @Test
-    void testhoursWithExam() {
-        SleepModel correctSleep = new SleepModel("Monday", 8.0, false);
+    void testGetSleepEntries() {
         weeklySleep.addSleepModel(dailySleep);
-        weeklySleep.addSleepModel(correctSleep);
-        assertEquals(6.0, weeklySleep.hoursWithExam());
+        SleepModel model2 = new SleepModel("Tuesday", 8.0, false);
+        weeklySleep.addSleepModel(model2);
+
+        String entries = "Sleep Entry #1" + "\n" + "Day of the week: Monday" + "\n" + "Hours slept today: 6.0" + "\n"
+                + "Have exams coming up: true" + "\n" + "\n" +
+                "Sleep Entry #2" + "\n" + "Day of the week: Tuesday" + "\n" + "Hours slept today: 8.0" + "\n"
+                + "Have exams coming up: false" + "\n" + "\n";
+        assertEquals(entries, weeklySleep.getSleepEntries());
+
+
     }
+
+
+    // ADDED NOV 9
+//    @Test
+//    void testhoursWithoutExam() {
+//        SleepModel correctSleep = new SleepModel("Monday", 8.0, false);
+//        weeklySleep.addSleepModel(dailySleep);
+//        weeklySleep.addSleepModel(correctSleep);
+//        assertEquals(8.0, weeklySleep.hoursWithoutExam());
+//    }
+//
+//    @Test
+//    void testhoursWithExam() {
+//        SleepModel correctSleep = new SleepModel("Monday", 8.0, false);
+//        weeklySleep.addSleepModel(dailySleep);
+//        weeklySleep.addSleepModel(correctSleep);
+//        assertEquals(6.0, weeklySleep.hoursWithExam());
+//    }
 
 
 

@@ -105,26 +105,26 @@ public class SleepPerWeek implements Writable {
 
 
 
-    // ADDED NOV 9th
-    public double hoursWithoutExam() {
-        double hours = 0;
-        for (SleepModel sleep : sleepPerWeek) {
-            if (!sleep.getExamOrNot()) {
-                hours += sleep.getActualSleepPerDay();
-            }
-        }
-        return hours;
-    }
-
-    public double hoursWithExam() {
-        double hours = 0;
-        for (SleepModel sleep : sleepPerWeek) {
-            if (sleep.getExamOrNot()) {
-                hours += sleep.getActualSleepPerDay();
-            }
-        }
-        return hours;
-    }
+//    // ADDED NOV 9th
+//    public double hoursWithoutExam() {
+//        double hours = 0;
+//        for (SleepModel sleep : sleepPerWeek) {
+//            if (!sleep.getExamOrNot()) {
+//                hours += sleep.getActualSleepPerDay();
+//            }
+//        }
+//        return hours;
+//    }
+//
+//    public double hoursWithExam() {
+//        double hours = 0;
+//        for (SleepModel sleep : sleepPerWeek) {
+//            if (sleep.getExamOrNot()) {
+//                hours += sleep.getActualSleepPerDay();
+//            }
+//        }
+//        return hours;
+//    }
 
 
 
