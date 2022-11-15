@@ -41,6 +41,7 @@ public class SleepPerWeek implements Writable {
 //    }
 
 
+
     // EFFECTS: returns the sleepPerWeek list.
     public List<SleepModel> getSleepPerWeek() {
         return sleepPerWeek;
