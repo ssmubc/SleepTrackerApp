@@ -13,10 +13,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class SleepModelTest {
     private SleepModel dailySleep;
     private SleepPerWeek weeklySleep;
+    private SleepModel correctSleep;
+    private SleepModel model2;
+    private SleepModel model3;
     @BeforeEach
     void runBefore() {
         dailySleep = new SleepModel("Monday", 6.0, true);
+        correctSleep = new SleepModel("Monday", 8.0, false);
         weeklySleep = new SleepPerWeek();
+        model2 = new SleepModel("Tuesday", 8.0, false);
+        model3 = new SleepModel("Friday", 2.0, true);
     }
 
     @Test
@@ -48,7 +54,6 @@ class SleepModelTest {
 
     @Test
     void testEditSleepModel() {
-        SleepModel correctSleep = new SleepModel("Monday", 8.0, false);
         List<SleepModel> log = weeklySleep.getSleepPerWeek();
         weeklySleep.addSleepModel(dailySleep);
         weeklySleep.editSleepModel(dailySleep, correctSleep);
@@ -60,8 +65,7 @@ class SleepModelTest {
     @Test
     void testRemoveSleepModelWithIndex() {
         weeklySleep.addSleepModel(dailySleep);
-        SleepModel model2 = new SleepModel("Tuesday", 8.0, false);
-        SleepModel model3 = new SleepModel("Friday", 2.0, true);
+
         weeklySleep.addSleepModel(model2);
         weeklySleep.addSleepModel(model3);
         assertTrue(weeklySleep.removeSleepModel(0));
@@ -74,7 +78,6 @@ class SleepModelTest {
     @Test
     void testGetSleepEntries() {
         weeklySleep.addSleepModel(dailySleep);
-        SleepModel model2 = new SleepModel("Tuesday", 8.0, false);
         weeklySleep.addSleepModel(model2);
 
         String entries = "Sleep Entry #1" + "\n" + "Day of the week: Monday" + "\n" + "Hours slept today: 6.0" + "\n"
