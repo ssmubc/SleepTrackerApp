@@ -165,6 +165,7 @@ public class CreateGUI extends JFrame implements ActionListener {
         if (ae.getActionCommand().equals("Load entries file")) {
             loadSleepEntries();
         } else if (ae.getActionCommand().equals("Add your entries")) {
+
             createEntriesPage();
         } else if (ae.getActionCommand().equals("Save entries file")) {
             saveSleepEntries();
@@ -202,9 +203,17 @@ public class CreateGUI extends JFrame implements ActionListener {
             String dayOfWeek = String.valueOf(selection);
             try {
                 hoursSlept = Double.parseDouble(hours);
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                if (hoursSlept > 24) {
+                    returnToMainMenu();
+                    System.out.println("Please enter an entry for the number of hours you slept to be less than "
+                            + "or equal to 24");
+                    System.out.println("Your entry was not created");
+                    return;
+                }
+            } catch (NumberFormatException e) {
                 System.out.println("Invalid input, please click the add button again to provide your entry");
-                createEntriesPage();
+                returnToMainMenu();
+                return;
             }
             boolean examOrNot = Boolean.parseBoolean(selection2.toString());
             sleep = new SleepModel(dayOfWeek, hoursSlept, examOrNot);
@@ -213,8 +222,28 @@ public class CreateGUI extends JFrame implements ActionListener {
             System.out.println("Successfully added!!");
         } else {
             returnToMainMenu();
+            System.out.println("You have not added a new entry");
         }
 
+//        if (selection != null && hours != null && selection2 != null) {
+//            String dayOfWeek = String.valueOf(selection);
+//            try {
+//                hoursSlept = Double.parseDouble(hours);
+//                if (hoursSlept > 24) {
+//                    throw new IndexOutOfBoundsException();
+//                }
+//            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+//                System.out.println("Invalid input, please click the add button again to provide your entry");
+//                createEntriesPage();
+//            }
+//            boolean examOrNot = Boolean.parseBoolean(selection2.toString());
+//            sleep = new SleepModel(dayOfWeek, hoursSlept, examOrNot);
+//            sleepPerWeek.addSleepModel(sleep);
+//            entries.setText("<html><pre>Current entry: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
+//            System.out.println("Successfully added!!");
+//        } else {
+//            returnToMainMenu();
+//        }
     }
 
 //    Object selection = JOptionPane.showInputDialog(null, "Enter day of the week:",
@@ -299,6 +328,7 @@ public class CreateGUI extends JFrame implements ActionListener {
             System.out.println("The sleep entries is no longer existing");
         } else {
             returnToMainMenu();
+            System.out.println("You have not removed an entry");
         }
     }
 
@@ -352,7 +382,7 @@ public class CreateGUI extends JFrame implements ActionListener {
         try {
             JsonReader reader = new JsonReader(JSON_STORE);
             sleepPerWeek = reader.read();
-            entries.setText("<html><pre>Current Entries: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
+            entries.setText("<html><pre>Your Sleep Entries: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
             System.out.println("Entries loaded from file " + "./data/weeklySleep.json");
         } catch (IOException e) {
             entries.setText("No Entries added yet");
