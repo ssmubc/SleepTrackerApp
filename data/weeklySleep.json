@@ -20,6 +20,21 @@
             "Hours slept today": 9,
             "Have exams coming up": false,
             "Day of the week": "Wednesday"
+        },
+        {
+            "Hours slept today": 4,
+            "Have exams coming up": false,
+            "Day of the week": "Sunday"
+        },
+        {
+            "Hours slept today": 12,
+            "Have exams coming up": false,
+            "Day of the week": "Monday"
+        },
+        {
+            "Hours slept today": 10,
+            "Have exams coming up": false,
+            "Day of the week": "Sunday"
         }
     ]
 }

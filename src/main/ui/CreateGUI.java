@@ -41,9 +41,12 @@ public class CreateGUI extends JFrame implements ActionListener {
     private JPanel sleepEntriesPanel;
     private JLabel entries;
 
-    private String dayOfWeek;
     private double hoursSlept;
-    private boolean examOrNot;
+
+    private final Object[] selectionValues = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+            "Saturday"};
+    private final String initialSelection = "Sunday";
+
 
     // EFFECTS: constructs a JFrame as the welcome page with buttons and an image
     public CreateGUI() {
@@ -53,20 +56,17 @@ public class CreateGUI extends JFrame implements ActionListener {
         initializeMenu();
         makeSleepEntriesPanel();
 
-        JLabel welcomeLabel = new JLabel("Welcome to your SleepTracker!");
+        JLabel welcomeLabel = new JLabel("Weekly SleepTracker for Students");
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, 30));
         JLabel mainScreenImage = new JLabel();
         mainMenu.add(welcomeLabel);
-        addImageToLabel(mainScreenImage);
+        addImageToMenu(mainScreenImage);
 
         initializeMenuButtons();
 
         addActionToButton();
 
         mainMenu.setVisible(true);
-
-
-        //sleepPerWeek = new SleepPerWeek();
 
     }
 
@@ -83,11 +83,11 @@ public class CreateGUI extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS: sets the buttons on the menu with their labels
     public void initializeMenuButtons() {
-        button1 = new JButton("View current entries");
+        button1 = new JButton("Load entries file");
         button2 = new JButton("Add your sleep entry");
-        button3 = new JButton("Remove your sleep entry");
-        button4 = new JButton("Save entries file");
-        button5 = new JButton("Load entries file");
+        button3 = new JButton("Save entries file");
+        button4 = new JButton("View current entries");
+        button5 = new JButton("Remove your sleep entry");
         button6 = new JButton("Exit application");
 
         addButton(button1, mainMenu);
@@ -116,7 +116,7 @@ public class CreateGUI extends JFrame implements ActionListener {
     // EFFECTS: creates a button and adds it to the given panel, changing various attributes of the
     //          color and text of the button
     public void addMenuButton(JButton button1, JPanel panel) {
-        button1.setFont(new Font("Arial", Font.BOLD, 12));
+        button1.setPreferredSize(new Dimension(100, 100));
         button1.setForeground(Color.black);
         button1.setBackground(Color.white);
         panel.add(button1);
@@ -132,7 +132,7 @@ public class CreateGUI extends JFrame implements ActionListener {
     // XM2RI7HHE=
     // MODIFIES: this
     // EFFECTS: Creates the image on the main menu and its it to the panel
-    public void addImageToLabel(JLabel label) {
+    public void addImageToMenu(JLabel label) {
         label.setIcon(new ImageIcon("./data/sleepingBackground.jpg"));
         label.setMinimumSize(new Dimension(20,20));
         mainMenu.add(label);
@@ -143,15 +143,15 @@ public class CreateGUI extends JFrame implements ActionListener {
     public void addActionToButton() {
 
         button1.addActionListener(this);
-        button1.setActionCommand("View entries");
+        button1.setActionCommand("Load entries file");
         button2.addActionListener(this);
         button2.setActionCommand("Add your entries");
         button3.addActionListener(this);
-        button3.setActionCommand("Delete your entry");
+        button3.setActionCommand("Save entries file");
         button4.addActionListener(this);
-        button4.setActionCommand("Save entries file");
+        button4.setActionCommand("View entries");
         button5.addActionListener(this);
-        button5.setActionCommand("Load entries file");
+        button5.setActionCommand("Delete your entry");
         button6.addActionListener(this);
         button6.setActionCommand("Exit application");
 
@@ -161,99 +161,58 @@ public class CreateGUI extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS: calls the given methods when a certain button is clicked on
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getActionCommand().equals("View entries")) {
-            initializeSleepEntriesPanel();
+        if (ae.getActionCommand().equals("Load entries file")) {
+            loadSleepEntries();
         } else if (ae.getActionCommand().equals("Add your entries")) {
             createEntriesPage();
-        } else if (ae.getActionCommand().equals("Delete your entry")) {
-            removeSleepEntry();
         } else if (ae.getActionCommand().equals("Save entries file")) {
             saveSleepEntries();
-        } else if (ae.getActionCommand().equals("Exit application")) {
-            System.exit(0);
+        } else if (ae.getActionCommand().equals("View entries")) {
+            initializeSleepEntriesPanel();
+        } else if (ae.getActionCommand().equals("Delete your entry")) {
+            removeSleepEntry();
         } else if (ae.getActionCommand().equals("Return to main menu")) {
             returnToMainMenu();
-        } else if (ae.getActionCommand().equals("Load entries file")) {
-            loadSleepEntries();
+        } else if (ae.getActionCommand().equals("Exit application")) {
+            System.exit(0);
         }
     }
 
     // CITATION: https://www.youtube.com/watch?v=arcTW_znJYY
     // CITATION: http://www.java2s.com/Tutorial/Java/0240__Swing/UsingJOptionPanewithapredefinedselections.htm
+    // CITATION: https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-
+    // Opinions/Javas-JOptionPane-showOptionDialog-by-Example
     // MODIFIES: this
     // EFFECTS: allows the user to input their sleep entry and adds it to SleepPerWeek, and prints it on
     // the sleepEntriesPanel.
     public void createEntriesPage() {
-        String hours;
-//        response = JOptionPane.showInputDialog("Enter day of the week:");
-//        dayOfWeek = response;
-
-        Object[] selectionValues = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-        String initialSelection = "Sunday";
         Object selection = JOptionPane.showInputDialog(null, "Enter day of the week:",
                 "Day of the week", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
-        dayOfWeek = String.valueOf(selection);
+        String dayOfWeek = String.valueOf(selection);
 
-//
         try {
-            hours = JOptionPane.showInputDialog("Enter number of hours slept:");
+            String hours = JOptionPane.showInputDialog("Enter number of hours slept:");
             if (hours != null) {
                 hoursSlept = Double.parseDouble(hours);
             }
+
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            System.out.println("Invalid input, please try again");
+            System.out.println("Invalid input, please click the add button again to provide your entry");
             createEntriesPage();
         }
 
         // DO I NEED THIS PARENT COMPONENT TO BE NULL?
         Object[] selectionValues2 = {"true", "false"};
         String initialSelection2 = "false";
-        Object selection2 = JOptionPane.showInputDialog(null, "Enter day of the week:",
+        Object selection2 = JOptionPane.showInputDialog(null, "Enter if you have exams soon:",
                 "Exams coming up", JOptionPane.QUESTION_MESSAGE, null, selectionValues2, initialSelection2);
-        examOrNot = Boolean.parseBoolean(selection2.toString());
+        boolean examOrNot = Boolean.parseBoolean(selection2.toString());
 
-
-//
-//        response = JOptionPane.showInputDialog("Enter if you have an exam soon:");
-//        if (response != null) {
-//            examOrNot = Boolean.parseBoolean(response);
-//        }
-//
-//
         sleep = new SleepModel(dayOfWeek, hoursSlept, examOrNot);
         sleepPerWeek.addSleepModel(sleep);
         entries.setText("<html><pre>Current entry: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
         System.out.println("Successfully added!!");
         System.out.println(sleepPerWeek.getSleepPerWeek());
-
-        // BELOW IS WORKING SOLUTION
-
-//        String response;
-//        response = JOptionPane.showInputDialog("Enter day of the week:");
-//        dayOfWeek = response;
-//
-//        try {
-//            response = JOptionPane.showInputDialog("Enter number of hours slept:");
-//            if (response != null) {
-//                hoursSlept = Double.parseDouble(response);
-//            }
-//        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-//            System.out.println("Invalid input, please try again");
-//            createEntriesPage();
-//        }
-//
-//        response = JOptionPane.showInputDialog("Enter if you have an exam soon:");
-//        if (response != null) {
-//            examOrNot = Boolean.parseBoolean(response);
-//        }
-//
-//
-//        sleep = new SleepModel(dayOfWeek, hoursSlept, examOrNot);
-//        sleepPerWeek.addSleepModel(sleep);
-//        entries.setText("<html><pre>Current entry: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
-//        System.out.println("Successfully added!!");
-//        System.out.println(sleepPerWeek.getSleepPerWeek());
-
     }
 
 
@@ -271,14 +230,15 @@ public class CreateGUI extends JFrame implements ActionListener {
         JScrollPane scroll = new JScrollPane(entries, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
+
         JButton mainMenuButton = new JButton();
+        mainMenuButton.setBounds(100, 100, 100, 80);
+        //mainMenuButton.setPreferredSize(new Dimension(10, 100));
         mainMenuButton.setText("Return to Main Menu");
         mainMenuButton.setActionCommand("Return to main menu");
         mainMenuButton.addActionListener(this);
         addMenuButton(mainMenuButton, sleepEntriesPanel);
-        //mainMenuButton.setForeground(Color.BLACK);
 
-        entries.setFont(new Font("ComicSans", Font.BOLD, 12));
         sleepEntriesPanel.add(scroll);
 
     }
@@ -288,13 +248,10 @@ public class CreateGUI extends JFrame implements ActionListener {
     // If an entry with the day of the week is made then it will delete that entry otherwise it will not.
     public void removeSleepEntry() {
         try {
-            String response;
-            Object[] selectionValues = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-            String initialSelection = "Sunday";
             Object selection = JOptionPane.showInputDialog(null,
                     "Which day of the week do you want to remove",
                     "Remove an entry", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
-            response = String.valueOf(selection);
+            String response = String.valueOf(selection);
             SleepModel sleep2 = new SleepModel("", 0, false);
             for (SleepModel sleep : sleepPerWeek.getSleepPerWeek()) {
                 if (sleep.getDayOfTheWeek().equals(response)) {
@@ -312,29 +269,6 @@ public class CreateGUI extends JFrame implements ActionListener {
             entries.setText("Please provide a valid input");
         }
     }
-
-    // Previous remove function working but no scroll options
-//            try {
-//        String response;
-//        response = JOptionPane.showInputDialog("Which day of the week do you want to remove");
-//        SleepModel sleep2 = new SleepModel("", 0, false);
-//        for (SleepModel sleep : sleepPerWeek.getSleepPerWeek()) {
-//            if (sleep.getDayOfTheWeek().equals(response)) {
-//                sleep2 = sleep;
-//            }
-//        }
-//        if (!sleep2.getDayOfTheWeek().equals("")) {
-//            sleepPerWeek.removeSleepModel(sleep2);
-//            entries.setText("<html><pre>Current entries: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
-//            System.out.println("The sleep entries is no longer existing");
-//        } else {
-//            System.out.println("There is no entry for " + response);
-//        }
-//    } catch (IndexOutOfBoundsException e) {
-//        entries.setText("Please provide a valid input");
-//    }
-
-
 
 
 
