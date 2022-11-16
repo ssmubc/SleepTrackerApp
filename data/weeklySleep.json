@@ -2,19 +2,9 @@
     "Month": "NOVEMBER",
     "Weekly sleep log": [
         {
-            "Hours slept today": 8,
-            "Have exams coming up": false,
-            "Day of the week": "Sunday"
-        },
-        {
             "Hours slept today": 7,
             "Have exams coming up": false,
             "Day of the week": "Monday"
-        },
-        {
-            "Hours slept today": 7,
-            "Have exams coming up": true,
-            "Day of the week": "Tuesday"
         },
         {
             "Hours slept today": 9,
@@ -27,12 +17,12 @@
             "Day of the week": "Sunday"
         },
         {
-            "Hours slept today": 12,
+            "Hours slept today": 2,
             "Have exams coming up": false,
-            "Day of the week": "Monday"
+            "Day of the week": "Sunday"
         },
         {
-            "Hours slept today": 10,
+            "Hours slept today": 2,
             "Have exams coming up": false,
             "Day of the week": "Sunday"
         }

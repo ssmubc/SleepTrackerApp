@@ -42,6 +42,7 @@ public class CreateGUI extends JFrame implements ActionListener {
     private JLabel entries;
 
     private double hoursSlept;
+    String hours;
 
     private final Object[] selectionValues = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
             "Saturday"};
@@ -188,32 +189,61 @@ public class CreateGUI extends JFrame implements ActionListener {
     public void createEntriesPage() {
         Object selection = JOptionPane.showInputDialog(null, "Enter day of the week:",
                 "Day of the week", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
-        String dayOfWeek = String.valueOf(selection);
 
-        try {
-            String hours = JOptionPane.showInputDialog("Enter number of hours slept:");
-            if (hours != null) {
-                hoursSlept = Double.parseDouble(hours);
-            }
-
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            System.out.println("Invalid input, please click the add button again to provide your entry");
-            createEntriesPage();
-        }
+        hours = JOptionPane.showInputDialog("Enter number of hours slept:");
 
         // DO I NEED THIS PARENT COMPONENT TO BE NULL?
         Object[] selectionValues2 = {"true", "false"};
         String initialSelection2 = "false";
         Object selection2 = JOptionPane.showInputDialog(null, "Enter if you have exams soon:",
                 "Exams coming up", JOptionPane.QUESTION_MESSAGE, null, selectionValues2, initialSelection2);
-        boolean examOrNot = Boolean.parseBoolean(selection2.toString());
 
-        sleep = new SleepModel(dayOfWeek, hoursSlept, examOrNot);
-        sleepPerWeek.addSleepModel(sleep);
-        entries.setText("<html><pre>Current entry: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
-        System.out.println("Successfully added!!");
-        System.out.println(sleepPerWeek.getSleepPerWeek());
+        if (selection != null && hours != null && selection2 != null) {
+            String dayOfWeek = String.valueOf(selection);
+            try {
+                hoursSlept = Double.parseDouble(hours);
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                System.out.println("Invalid input, please click the add button again to provide your entry");
+                createEntriesPage();
+            }
+            boolean examOrNot = Boolean.parseBoolean(selection2.toString());
+            sleep = new SleepModel(dayOfWeek, hoursSlept, examOrNot);
+            sleepPerWeek.addSleepModel(sleep);
+            entries.setText("<html><pre>Current entry: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
+            System.out.println("Successfully added!!");
+        } else {
+            returnToMainMenu();
+        }
+
     }
+
+//    Object selection = JOptionPane.showInputDialog(null, "Enter day of the week:",
+//                "Day of the week", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+//        String dayOfWeek = String.valueOf(selection);
+//
+//        try {
+//            String hours = JOptionPane.showInputDialog("Enter number of hours slept:");
+//            if (hours != null) {
+//                hoursSlept = Double.parseDouble(hours);
+//            }
+//
+//        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+//            System.out.println("Invalid input, please click the add button again to provide your entry");
+//            createEntriesPage();
+//        }
+//
+//        // DO I NEED THIS PARENT COMPONENT TO BE NULL?
+//        Object[] selectionValues2 = {"true", "false"};
+//        String initialSelection2 = "false";
+//        Object selection2 = JOptionPane.showInputDialog(null, "Enter if you have exams soon:",
+//                "Exams coming up", JOptionPane.QUESTION_MESSAGE, null, selectionValues2, initialSelection2);
+//        boolean examOrNot = Boolean.parseBoolean(selection2.toString());
+//
+//        sleep = new SleepModel(dayOfWeek, hoursSlept, examOrNot);
+//        sleepPerWeek.addSleepModel(sleep);
+//        entries.setText("<html><pre>Current entry: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
+//        System.out.println("Successfully added!!");
+//        System.out.println(sleepPerWeek.getSleepPerWeek());
 
 
     // EFFECTS: makes the sleepEntriesPanel visible and mainMenu non-visible.
@@ -243,33 +273,75 @@ public class CreateGUI extends JFrame implements ActionListener {
 
     }
 
+    // CITATIONS: https://stackoverflow.com/questions/22319669/how-to-create-array-inside-for-loop-in-java
+    // https://www.geeksforgeeks.org/how-to-add-an-element-to-an-array-in-java/
     // MODIFIES: this
     // EFFECTS: removes an entry from the list of entries after the user provides the day of the entry.
     // If an entry with the day of the week is made then it will delete that entry otherwise it will not.
     public void removeSleepEntry() {
-        try {
-            Object selection = JOptionPane.showInputDialog(null,
-                    "Which day of the week do you want to remove",
-                    "Remove an entry", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
-            String response = String.valueOf(selection);
-            SleepModel sleep2 = new SleepModel("", 0, false);
-            for (SleepModel sleep : sleepPerWeek.getSleepPerWeek()) {
-                if (sleep.getDayOfTheWeek().equals(response)) {
-                    sleep2 = sleep;
-                }
-            }
-            if (!sleep2.getDayOfTheWeek().equals("")) {
-                sleepPerWeek.removeSleepModel(sleep2);
-                entries.setText("<html><pre>Current entries: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
-                System.out.println("The sleep entries is no longer existing");
-            } else {
-                System.out.println("There is no entry for " + response);
-            }
-        } catch (IndexOutOfBoundsException e) {
-            entries.setText("Please provide a valid input");
+        int response = 0;
+        int n = sleepPerWeek.getSleepPerWeek().size();
+        Object[] selectionValues = new Object[n];
+        for (int i = 1; i <= n; i++) {
+            selectionValues[i - 1] = i;
+        }
+
+        int initialSelection = 0;
+        Object selection = JOptionPane.showInputDialog(null,
+                "Which entry number listed in the view panel do you want to remove? ",
+                "Remove an entry", JOptionPane.QUESTION_MESSAGE, null, selectionValues,
+                initialSelection);
+
+        if (selection != null) {
+            response = Integer.parseInt(selection.toString());
+            sleepPerWeek.removeSleepModel(response - 1);
+            entries.setText("<html><pre>Current entries: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
+            System.out.println("The sleep entries is no longer existing");
+        } else {
+            returnToMainMenu();
         }
     }
 
+
+
+//            SleepModel sleep2 = new SleepModel("", 1000, false);
+//            for (SleepModel sleep : sleepPerWeek.getSleepPerWeek()) {
+//                if (sleep.getDayOfTheWeek().equals(response)) {
+//                    sleep2 = sleep;
+//                }
+//            }
+//            if (!sleep2.getDayOfTheWeek().equals("")) {
+//                sleepPerWeek.removeSleepModel(sleep2);
+//               entries.setText("<html><pre>Current entries: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
+//                System.out.println("The sleep entries is no longer existing");
+//            } else {
+//                System.out.println("There is no entry for " + response);
+//            }
+//        } catch (IndexOutOfBoundsException e) {
+//            entries.setText("Please provide a valid input");
+//        }
+
+//            try {
+//        Object selection = JOptionPane.showInputDialog(null,
+//                "Which day of the week do you want to remove",
+//                "Remove an entry", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+//        String response = String.valueOf(selection);
+//        SleepModel sleep2 = new SleepModel("", 0, false);
+//        for (SleepModel sleep : sleepPerWeek.getSleepPerWeek()) {
+//            if (sleep.getDayOfTheWeek().equals(response)) {
+//                sleep2 = sleep;
+//            }
+//        }
+//        if (!sleep2.getDayOfTheWeek().equals("")) {
+//            sleepPerWeek.removeSleepModel(sleep2);
+//            entries.setText("<html><pre>Current entries: \n" + sleepPerWeek.getSleepEntries() + "\n</pre></html>");
+//            System.out.println("The sleep entries is no longer existing");
+//        } else {
+//            System.out.println("There is no entry for " + response);
+//        }
+//    } catch (IndexOutOfBoundsException e) {
+//        entries.setText("Please provide a valid input");
+//    }
 
 
     // CITATION: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/master/src/main/ui/
