@@ -1,4 +1,4 @@
-# My Personal Project - Sleep Pattern Tracker
+# My Personal Project - Weekly SleepTracker for Students
 
 ## Project by Sharon Marfatia
 
@@ -28,27 +28,28 @@ daily sleep patterns.
 # Instructions for Grader
 
 - You can generate the first required event related to adding Xs to a Y by clicking on the button labelled 
-"Add your sleep entry". This button is on the menu page titled "Welcome to your SleepTracker!" You will be asked to
+"Add your sleep entry". This button is on the menu page titled "Weekly SleepTracker for Students" You will be asked to
 provide the day of the week you want to create an entry for, the number of hours you slept, and whether you have exams
 or not (true/false). After filling out all three input prompts you will have created a new sleep entry (X) and it will 
 get added to the list of sleep entries (Y). You can view the panel in which all the Xs that have already been added to Y
-are displayed by clicking the button titled "View current entries". This button is on the menu page titled "Welcome to 
-your SleepTracker!" Once you have viewed your list of entries you can return to the main menu by clicking the button 
-titled "Return to Main Menu". To see a list of entries previously made, please reload the state of my application. You 
-can also view entries on this panel after adding new entries as described above.
+are displayed by clicking the button titled "View current entries". This button is on the menu page titled 
+"Weekly SleepTracker for Students" Once you have viewed your list of entries you can return to the main menu by clicking
+the button titled "Return to Main Menu". To see a list of entries previously made, please reload the state of my 
+application. You can also view entries on this panel after adding new entries as described above.
 - You can generate the second required event related to adding Xs to a Y which is to remove a sleep entry by clicking on
-the button labelled "Remove your sleep entry". This button is on the menu page titled "Welcome to your SleepTracker!"
-You will be asked to provide the day of the week for which you had created an entry for earlier, which you now want to 
-remove. After filling out that prompt, if an entry exists with that day, it will get removed from Y. 
-(You can see this change on the json file "weeklySleep.json" if you click the button titled "Save entries file" on the 
-main menu).
+the button labelled "Remove your sleep entry". This button is on the menu page titled "Weekly SleepTracker for Students"
+You will be asked to provide the entry number you wish to remove. You can find this entry number by clicking on the 
+button titled "View current entries" on the main menu. After selecting from the drop-down list and clicking "OK", it 
+will get removed from Y. (You can see this change on the json file "weeklySleep.json" if you click the button titled
+"Save entries file" on the main menu).
 - You can locate my visual component by running Main in the ui package and an image of a fictional person sleeping will 
-be displayed on the menu page titled "Welcome to your SleepTracker!"
+be displayed on the menu page titled "Weekly SleepTracker for Students".
 - You can save the state of my application by clicking on the button titled "Save entries file". This button is on the 
-menu page titled "Welcome to your SleepTracker!" Please load your file first before saving your entries. 
+menu page titled "Weekly SleepTracker for Students" Please load your file first before saving your entries. 
 - You can reload the state of my application by clicking on the button titled "Load entries file". This button is on the
-menu page titled "Welcome to your SleepTracker!" If you want to view the current entries saved on this file, then please
-click the button titled "View current entries". This button is on the menu page titled "Welcome to your SleepTracker!"
+menu page titled "Weekly SleepTracker for Students." If you want to view the current entries saved on this file, then 
+please click the button titled "View current entries." This button is on the menu page titled "Weekly SleepTracker for
+Students."
 
 
 *User Stories*

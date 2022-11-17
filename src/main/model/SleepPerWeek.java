@@ -32,13 +32,6 @@ public class SleepPerWeek implements Writable {
         }
         return sleepPerWeek;
     }
-//    public List<SleepModel> addSleepModel(SleepModel sleep) {
-//        if (sleep != null) {
-//            sleepPerWeek.add(sleep);
-//
-//        }
-//        return sleepPerWeek;
-//    }
 
 
 
@@ -60,7 +53,8 @@ public class SleepPerWeek implements Writable {
     }
 
 
-    // added on Nov 9
+    // MODIFIES: this
+    // EFFECTS: removes a sleep entry from the log based on its index.
     public Boolean removeSleepModel(int index) {
         if (index < sleepPerWeek.size()) {
             sleepPerWeek.remove(index);
@@ -70,7 +64,7 @@ public class SleepPerWeek implements Writable {
         }
     }
 
-    // EFFECTS: lists all the cars in list and their respective details
+    // EFFECTS: creates a list of the sleep entries
     public String getSleepEntries() {
         String entries = "";
         for (int i = 0; i < sleepPerWeek.size(); i++) {
@@ -96,36 +90,6 @@ public class SleepPerWeek implements Writable {
         return sleepPerWeek.size();
     }
 
-
-//    // ADDED NOV 9
-//    public List<String> makeEntries(int index) {
-//        String entry = "Day: " + sleepPerWeek.get(index).getActualSleepPerDay() + "Number of hours slept: " +
-//        sleepPerWeek.get(index).getActualSleepPerDay()
-//                + "Had an exam: " + sleepPerWeek.get(index).getExamOrNot() + ""
-//    }
-
-
-
-//    // ADDED NOV 9th
-//    public double hoursWithoutExam() {
-//        double hours = 0;
-//        for (SleepModel sleep : sleepPerWeek) {
-//            if (!sleep.getExamOrNot()) {
-//                hours += sleep.getActualSleepPerDay();
-//            }
-//        }
-//        return hours;
-//    }
-//
-//    public double hoursWithExam() {
-//        double hours = 0;
-//        for (SleepModel sleep : sleepPerWeek) {
-//            if (sleep.getExamOrNot()) {
-//                hours += sleep.getActualSleepPerDay();
-//            }
-//        }
-//        return hours;
-//    }
 
 
 
