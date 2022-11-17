@@ -1,6 +1,5 @@
 package ui;
 
-
 // represents the main program execution class
 public class Main {
 

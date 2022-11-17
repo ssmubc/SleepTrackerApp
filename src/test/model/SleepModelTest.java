@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -88,26 +87,5 @@ class SleepModelTest {
 
 
     }
-
-
-    // ADDED NOV 9
-//    @Test
-//    void testhoursWithoutExam() {
-//        SleepModel correctSleep = new SleepModel("Monday", 8.0, false);
-//        weeklySleep.addSleepModel(dailySleep);
-//        weeklySleep.addSleepModel(correctSleep);
-//        assertEquals(8.0, weeklySleep.hoursWithoutExam());
-//    }
-//
-//    @Test
-//    void testhoursWithExam() {
-//        SleepModel correctSleep = new SleepModel("Monday", 8.0, false);
-//        weeklySleep.addSleepModel(dailySleep);
-//        weeklySleep.addSleepModel(correctSleep);
-//        assertEquals(6.0, weeklySleep.hoursWithExam());
-//    }
-
-
-
 
 }

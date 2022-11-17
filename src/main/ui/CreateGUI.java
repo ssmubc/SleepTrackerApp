@@ -122,7 +122,7 @@ public class CreateGUI extends JFrame implements ActionListener {
     // EFFECTS: Adds an image to the main menu
     public void addImageToMenu(JLabel label) {
         label.setIcon(new ImageIcon("./data/sleepingBackground.jpg"));
-        label.setMinimumSize(new Dimension(23,23));
+        label.setMinimumSize(new Dimension(23, 23));
         mainMenu.add(label);
     }
 
@@ -180,6 +180,7 @@ public class CreateGUI extends JFrame implements ActionListener {
         }
     }
 
+    // CITATION: https://docs.oracle.com/javase/tutorial/uiswing/components/html.html
     // EFFECTS: Updates the entries printed on the sleepEntriesPanel.
     public void setEntriesOnPanel() {
         entries.setText("<html><pre><font size=\"4\" face=\"arial\" color=\"black\">Your Sleep Entries: \n" + "\n"
@@ -271,7 +272,6 @@ public class CreateGUI extends JFrame implements ActionListener {
     }
 
 
-
     // CITATIONS: https://stackoverflow.com/questions/22319669/how-to-create-array-inside-for-loop-in-java
     // https://www.geeksforgeeks.org/how-to-add-an-element-to-an-array-in-java/
     // https://www.w3schools.com/HTML/tryit.asp?filename=tryhtml_font
@@ -302,5 +302,4 @@ public class CreateGUI extends JFrame implements ActionListener {
             System.out.println("You have not removed an entry");
         }
     }
-
 }

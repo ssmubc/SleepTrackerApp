@@ -17,14 +17,19 @@
             "Day of the week": "Tuesday"
         },
         {
-            "Hours slept today": 8,
+            "Hours slept today": 7,
             "Have exams coming up": false,
             "Day of the week": "Wednesday"
         },
         {
-            "Hours slept today": 6,
-            "Have exams coming up": true,
+            "Hours slept today": 7,
+            "Have exams coming up": false,
             "Day of the week": "Thursday"
+        },
+        {
+            "Hours slept today": 4,
+            "Have exams coming up": true,
+            "Day of the week": "Friday"
         }
     ]
 }

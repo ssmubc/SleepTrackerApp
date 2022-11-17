@@ -25,6 +25,7 @@ looking so that you can direct yourself to change your habits for a healthier li
 this, and so with this Sleep Pattern Tracker, I also want other students to benefit from a healthier approach to their 
 daily sleep patterns.
 
+
 # Instructions for Grader
 
 - You can generate the first required event related to adding Xs to a Y by clicking on the button labelled 
@@ -75,3 +76,6 @@ Phase 2 user stories:
 CITATION: studied and referenced:
 https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 https://github.students.cs.ubc.ca/CPSC210/TellerApp/blob/main/src/main/ca/ubc/cpsc210/bank/ui/TellerApp.java
+
+CITATIONS for Phase 3 (read and studied) are included in the CreateGUI.java class
+
