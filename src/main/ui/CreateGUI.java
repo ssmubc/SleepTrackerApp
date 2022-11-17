@@ -49,7 +49,6 @@ public class CreateGUI extends JFrame implements ActionListener {
     private final String initialSelection = "Sunday";
 
 
-
     // EFFECTS: Creates a JFrame as the welcome page with buttons and an image
     public CreateGUI() {
         super("Welcome to your sleep tracker!");
@@ -144,7 +143,6 @@ public class CreateGUI extends JFrame implements ActionListener {
         button6.setActionCommand("Exit application");
 
     }
-
 
     // MODIFIES: this
     // EFFECTS: calls the given methods when a certain button is clicked on
