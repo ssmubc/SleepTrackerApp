@@ -37,7 +37,7 @@ class SleepModelTest {
     void testEventLogRemove() {
         weeklySleep.removeSleepModel(0);
         EventLog eventlog = EventLog.getInstance();
-        Event event =null;
+        Event event = null;
         for (Event event1 : eventlog) {
             event = event1;
             System.out.println(event.getDescription());
