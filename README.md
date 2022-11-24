@@ -4,11 +4,11 @@
 
 
 **What my application will do:**
-- My application will track a student's *sleep targets for the week in hours* and store data on their *sleep record
-throughout the week in hours*. Using this information, the tracker will report their *sleep debt (hours of sleep 
-targeted - actual hours of sleep)* or *sleep surplus*. Additional console-based questions will be asked from the user 
-on whether they had *exams during the week or not* to compare how exams may or may not have affected the student's sleep 
-time. This information can be shown through graphical representation (e.g., bar graph).
+- My application will track a student's *sleep entries for the week in hours* and store data on their *sleep record
+throughout the week in hours*. Additional console-based questions will be asked from the user on what *day of the week*
+is being recorded, how many *hours they slept*, and whether they had *exams during the week or not* to compare how exams
+may or may not have affected the student's sleep time. The application can also display an image through the GUI-based
+program.
 
 **Who will use it:**
 - This application is intended for high school, undergraduate, or graduate students trying to improve their sleep 
@@ -79,3 +79,60 @@ https://github.students.cs.ubc.ca/CPSC210/TellerApp/blob/main/src/main/ca/ubc/cp
 
 CITATIONS for Phase 3 (read and studied) are included in the CreateGUI.java class
 
+# Phase 4: Task 2
+I have pasted a representative sample of the events that occur when my program runs. After starting the program I loaded
+my existing entries from the file (weeklySleep.json). It contained 7 entries. I then added a new entry (8th entry) and 
+saved it to the file. I then removed the 7th entry and saved the file. This resulted in a total of 7 entries being saved
+to the file before the program was exited. The sample of events printed on the console is shown below. 
+
+Entries loaded from file ./data/weeklySleep.json
+
+Successfully added!!
+
+The sleep entries is no longer existing
+
+Sleep entries saved to file ./data/weeklySleep.json
+
+Tue Nov 22 13:54:37 PST 2022
+
+Added sleep entry to your log
+
+Tue Nov 22 13:54:37 PST 2022
+
+Added sleep entry to your log
+
+Tue Nov 22 13:54:37 PST 2022
+
+Added sleep entry to your log
+
+Tue Nov 22 13:54:37 PST 2022
+
+Added sleep entry to your log
+
+Tue Nov 22 13:54:37 PST 2022
+
+Added sleep entry to your log
+
+Tue Nov 22 13:54:37 PST 2022
+
+Added sleep entry to your log
+
+Tue Nov 22 13:54:37 PST 2022
+
+Added sleep entry to your log
+
+Tue Nov 22 13:54:44 PST 2022
+
+Added sleep entry to your log
+
+Tue Nov 22 13:54:51 PST 2022
+
+Removed a sleep entry from your log
+
+# Phase 4: Task 3
+Refactoring that I would do to improve my design:
+- I could remove the association relationship between SleepModel and CreateGUI since there is already an association 
+between SleepPerWeek and CreateGUI and SleepPerWeek contains SleepModel. This could be done by locally initializing a 
+new SleepModel directly inside the createEntriesPage(). 
+- Reduce the dependency between classes (right now SleepPerWeek and CreateGUI are dependent on EventLog, and JsonReader 
+and JsonWriter are dependent on SleepPerWeek).

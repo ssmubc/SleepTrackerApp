@@ -38,7 +38,6 @@ public class SleepModel implements Writable {
     public double getActualSleepPerDay() {
         return actualSleepPerDay;
     }
-    
 
 
     // CITATION: studied and referenced:

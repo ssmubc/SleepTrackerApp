@@ -1,5 +1,6 @@
 package ui;
 
+import model.EventLog;
 import model.SleepModel;
 import model.SleepPerWeek;
 import persistence.JsonReader;
@@ -10,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.util.Iterator;
 
 
 // CITATIONS (read and studied): https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ButtonDemoProject
@@ -43,6 +45,8 @@ public class CreateGUI extends JFrame implements ActionListener {
 
     private double hoursSlept;
     String hours;
+    private JsonReader reader;
+    private JsonWriter writer;
 
     private final Object[] selectionValues = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
             "Saturday"};
@@ -70,6 +74,8 @@ public class CreateGUI extends JFrame implements ActionListener {
         setActionToButton();
 
         mainMenu.setVisible(true);
+        reader = new JsonReader(JSON_STORE);
+        writer = new JsonWriter(JSON_STORE);
 
     }
 
@@ -161,6 +167,9 @@ public class CreateGUI extends JFrame implements ActionListener {
         } else if (actionEvent.getActionCommand().equals("Return to main menu")) {
             returnToMainMenu();
         } else if (actionEvent.getActionCommand().equals("Exit application")) {
+            for (model.Event e: EventLog.getInstance()) {
+                System.out.println(e.toString());
+            }
             System.exit(0);
         }
     }
@@ -171,7 +180,6 @@ public class CreateGUI extends JFrame implements ActionListener {
     // EFFECTS: loads the entries from the json file.
     private void loadSleepEntries() {
         try {
-            JsonReader reader = new JsonReader(JSON_STORE);
             sleepPerWeek = reader.read();
             setEntriesOnPanel();
             System.out.println("Entries loaded from file " + "./data/weeklySleep.json");
@@ -229,7 +237,6 @@ public class CreateGUI extends JFrame implements ActionListener {
     // EFFECTS: Saves the entries to the json file
     private void saveSleepEntries() {
         try {
-            JsonWriter writer = new JsonWriter(JSON_STORE);
             writer.open();
             writer.write(sleepPerWeek);
             writer.close();

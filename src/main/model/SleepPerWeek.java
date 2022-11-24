@@ -30,7 +30,10 @@ public class SleepPerWeek implements Writable {
         if (!sleepPerWeek.contains(sleep)) {
             sleepPerWeek.add(sleep);
         }
+
+        EventLog.getInstance().logEvent(new Event("Added sleep entry to your log"));
         return sleepPerWeek;
+
     }
 
 
@@ -45,19 +48,15 @@ public class SleepPerWeek implements Writable {
     }
 
 
-    // REQUIRES: sleep != null
-    // MODIFIES: this
-    // EFFECTS: removes a sleep entry from the log.
-    public void removeSleepModel(SleepModel sleep) {
-        sleepPerWeek.remove(sleep);
-    }
-
 
     // MODIFIES: this
     // EFFECTS: removes a sleep entry from the log based on its index.
     public Boolean removeSleepModel(int index) {
         if (index < sleepPerWeek.size()) {
             sleepPerWeek.remove(index);
+
+            // Added this line Nov 21
+            EventLog.getInstance().logEvent(new Event("Removed a sleep entry from your log"));
             return true;
         } else {
             return false;
@@ -74,6 +73,7 @@ public class SleepPerWeek implements Writable {
         }
         return entries;
     }
+
 
 
 

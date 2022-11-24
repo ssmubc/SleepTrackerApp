@@ -44,14 +44,6 @@ class SleepModelTest {
     }
 
     @Test
-    void testRemoveSleepModel() {
-        weeklySleep.addSleepModel(dailySleep);
-        List<SleepModel> log = weeklySleep.getSleepPerWeek();
-        weeklySleep.removeSleepModel(dailySleep);
-        assertFalse(log.contains(dailySleep));
-    }
-
-    @Test
     void testEditSleepModel() {
         List<SleepModel> log = weeklySleep.getSleepPerWeek();
         weeklySleep.addSleepModel(dailySleep);

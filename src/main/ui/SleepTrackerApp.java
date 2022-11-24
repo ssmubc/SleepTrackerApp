@@ -19,7 +19,6 @@ public class SleepTrackerApp {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-
     // EFFECTS: runs the Sleep Tracker application
     public SleepTrackerApp() throws FileNotFoundException {
         input = new Scanner(System.in);
