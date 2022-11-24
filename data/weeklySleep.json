@@ -27,8 +27,8 @@
             "Day of the week": "Thursday"
         },
         {
-            "Hours slept today": 7,
-            "Have exams coming up": true,
+            "Hours slept today": 5,
+            "Have exams coming up": false,
             "Day of the week": "Friday"
         }
     ]

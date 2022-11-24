@@ -22,6 +22,30 @@ class SleepModelTest {
         weeklySleep = new SleepPerWeek();
         model2 = new SleepModel("Tuesday", 8.0, false);
         model3 = new SleepModel("Friday", 2.0, true);
+        weeklySleep.addSleepModel(dailySleep);
+    }
+
+    @Test
+    void testEventLog() {
+        weeklySleep.addSleepModel(dailySleep);
+        EventLog eventlog = EventLog.getInstance();
+        assertEquals("Added sleep entry to your log",
+                eventlog.iterator().next().getDescription());
+    }
+
+    @Test
+    void testEventLogRemove() {
+        weeklySleep.removeSleepModel(0);
+        EventLog eventlog = EventLog.getInstance();
+        Event event =null;
+        for (Event event1 : eventlog) {
+            event = event1;
+            System.out.println(event.getDescription());
+        }
+
+        assertEquals("Removed a sleep entry from your log", event.getDescription());
+//        assertEquals("Removed a sleep entry from your log",
+//                eventlog.iterator().next().getDescription());
     }
 
     @Test
@@ -79,5 +103,8 @@ class SleepModelTest {
 
 
     }
+
+
+
 
 }
