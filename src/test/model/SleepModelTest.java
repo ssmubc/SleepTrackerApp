@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,10 +26,26 @@ class SleepModelTest {
         weeklySleep.addSleepModel(dailySleep);
     }
 
+    // EventLog related tests:
+//
+//    @Test
+//    void testClear() {
+//        Event event1 = new Event("Added sleep entry to your log");
+//        EventLog.getInstance().logEvent(event1);
+//        EventLog.getInstance().clear();
+//        assertEquals("Event log cleared.", EventLog.getInstance().iterator().next().getDescription());
+//
+//    }
+
     @Test
     void testEventLog() {
         weeklySleep.addSleepModel(dailySleep);
         EventLog eventlog = EventLog.getInstance();
+        //Event event = null;
+        for (Event event : eventlog) {
+            System.out.println(event.getDescription());
+        }
+
         assertEquals("Added sleep entry to your log",
                 eventlog.iterator().next().getDescription());
     }
@@ -38,6 +55,7 @@ class SleepModelTest {
         weeklySleep.removeSleepModel(0);
         EventLog eventlog = EventLog.getInstance();
         Event event = null;
+
         for (Event event1 : eventlog) {
             event = event1;
             System.out.println(event.getDescription());
@@ -47,6 +65,45 @@ class SleepModelTest {
 //        assertEquals("Removed a sleep entry from your log",
 //                eventlog.iterator().next().getDescription());
     }
+
+    @Test
+    void testEquals() {
+        Event event1 = new Event("Added sleep entry to your log");
+        Event event2 = new Event("Added sleep entry to your log");
+        Event event3 = new Event("Random event");
+        String str = "Random event";
+        Event event4 = null;
+        assertTrue(event1.equals(event2) && event2.equals(event1));
+        assertFalse(event1.equals(event3));
+        assertFalse(event1.equals(str));
+        assertFalse(event1.equals(event4));
+    }
+
+    @Test
+    void testHashCode() {
+        Event event1 = new Event("Added sleep entry to your log");
+        Event event2 = new Event("Added sleep entry to your log");
+        Event event3 = new Event("Random event");
+
+        assertTrue(event1.hashCode() == event2.hashCode());
+        assertFalse(event1.hashCode() == event3.hashCode());
+
+    }
+
+    @Test
+    void testToString() {
+        assertEquals(Calendar.getInstance().getTime() + "\n" +
+                        EventLog.getInstance().iterator().next().getDescription(),
+                EventLog.getInstance().iterator().next().toString());
+    }
+
+    @Test
+    void testGetDate() {
+        Event event1 = new Event("Added sleep entry to your log");
+        assertEquals(Calendar.getInstance().getTime(), event1.getDate());
+    }
+
+
 
     @Test
     void testConstructor() {
@@ -103,8 +160,6 @@ class SleepModelTest {
 
 
     }
-
-
 
 
 }

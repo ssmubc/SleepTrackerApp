@@ -83,7 +83,9 @@ CITATIONS for Phase 3 (read and studied) are included in the CreateGUI.java clas
 I have pasted a representative sample of the events that occur when my program runs. After starting the program I loaded
 my existing entries from the file (weeklySleep.json). It contained 7 entries. I then added a new entry (8th entry) and 
 saved it to the file. I then removed the 7th entry and saved the file. This resulted in a total of 7 entries being saved
-to the file before the program was exited. The sample of events printed on the console is shown below. 
+to the file before the program was exited. The sample of events printed on the console is shown below. The event to add
+a SleepModel to the SleepPerWeek class is called when the reader assigns reader.read() onto the instance of 
+SleepPerWeek which is why it prints adding a new log after loading the existing data from the file. 
 
 Entries loaded from file ./data/weeklySleep.json
 
