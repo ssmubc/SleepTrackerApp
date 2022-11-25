@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -67,7 +68,7 @@ class SleepModelTest {
     }
 
     @Test
-    void testEquals() {
+    void testEquals() throws InterruptedException {
         Event event1 = new Event("Added sleep entry to your log");
         Event event2 = new Event("Added sleep entry to your log");
         Event event3 = new Event("Random event");
@@ -77,6 +78,9 @@ class SleepModelTest {
         assertFalse(event1.equals(event3));
         assertFalse(event1.equals(str));
         assertFalse(event1.equals(event4));
+        TimeUnit.SECONDS.sleep(1); // sleep for 1 second
+        Event event5 = new Event("Random event");
+        assertFalse(event1.equals(event5));
     }
 
     @Test
