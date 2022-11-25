@@ -79,7 +79,7 @@ class SleepModelTest {
         assertFalse(event1.equals(str));
         assertFalse(event1.equals(event4));
         TimeUnit.SECONDS.sleep(1); // sleep for 1 second
-        Event event5 = new Event("Random event");
+        Event event5 = new Event("Added sleep entry to your log");
         assertFalse(event1.equals(event5));
     }
 
