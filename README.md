@@ -134,7 +134,6 @@ Removed a sleep entry from your log
 # Phase 4: Task 3
 Refactoring that I would do to improve my design:
 - I could remove the association relationship between SleepModel and CreateGUI since there is already an association 
-between SleepPerWeek and CreateGUI and SleepPerWeek contains SleepModel. This could be done by locally initializing a 
-new SleepModel directly inside the createEntriesPage(). 
-- Reduce the dependency between classes (right now SleepPerWeek and CreateGUI are dependent on EventLog, and JsonReader 
-and JsonWriter are dependent on SleepPerWeek).
+between SleepPerWeek and CreateGUI and SleepPerWeek contains SleepModel. This can be done by creating methods in the 
+SleepPerWeek class that will get the fields of the SleepModel so that CreateGUI can access the fields of SleepModel
+without having an association relationship with SleepModel.

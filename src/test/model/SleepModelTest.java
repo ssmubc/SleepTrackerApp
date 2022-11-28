@@ -25,30 +25,30 @@ class SleepModelTest {
         model2 = new SleepModel("Tuesday", 8.0, false);
         model3 = new SleepModel("Friday", 2.0, true);
         weeklySleep.addSleepModel(dailySleep);
+        EventLog.getInstance().clear();
     }
 
-    // EventLog related tests:
+    // EventLog and Event class related tests below:
 //
-//    @Test
-//    void testClear() {
-//        Event event1 = new Event("Added sleep entry to your log");
-//        EventLog.getInstance().logEvent(event1);
-//        EventLog.getInstance().clear();
-//        assertEquals("Event log cleared.", EventLog.getInstance().iterator().next().getDescription());
-//
-//    }
+    @Test
+    void testClear() {
+        EventLog.getInstance().clear();
+        assertEquals("Event log cleared.", EventLog.getInstance().iterator().next().getDescription());
+
+    }
 
     @Test
     void testEventLog() {
         weeklySleep.addSleepModel(dailySleep);
         EventLog eventlog = EventLog.getInstance();
-        //Event event = null;
-        for (Event event : eventlog) {
+        Event event = null;
+
+        for (Event event1 : eventlog) {
+            event = event1;
             System.out.println(event.getDescription());
         }
-
-        assertEquals("Added sleep entry to your log",
-                eventlog.iterator().next().getDescription());
+        assert event != null;
+        assertEquals("Added sleep entry to your log",event.getDescription());
     }
 
     @Test
@@ -63,8 +63,6 @@ class SleepModelTest {
         }
 
         assertEquals("Removed a sleep entry from your log", event.getDescription());
-//        assertEquals("Removed a sleep entry from your log",
-//                eventlog.iterator().next().getDescription());
     }
 
     @Test
@@ -161,8 +159,6 @@ class SleepModelTest {
                 "Sleep Entry #2" + "\n" + "Day of the week: Tuesday" + "\n" + "Hours slept today: 8.0" + "\n"
                 + "Have exams coming up: false" + "\n" + "\n";
         assertEquals(entries, weeklySleep.getSleepEntries());
-
-
     }
 
 
