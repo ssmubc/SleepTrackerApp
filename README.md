@@ -79,6 +79,8 @@ https://github.students.cs.ubc.ca/CPSC210/TellerApp/blob/main/src/main/ca/ubc/cp
 
 CITATIONS for Phase 3 (read and studied) are included in the CreateGUI.java class
 
+CITATION for Phase 4: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
+
 # Phase 4: Task 2
 I have pasted a representative sample of the events that occur when my program runs. After starting the program I loaded
 my existing entries from the file (weeklySleep.json). It contained 7 entries. I then added a new entry (8th entry) and 
@@ -134,6 +136,6 @@ Removed a sleep entry from your log
 # Phase 4: Task 3
 Refactoring that I would do to improve my design:
 - I could remove the association relationship between SleepModel and CreateGUI since there is already an association 
-between SleepPerWeek and CreateGUI and SleepPerWeek contains SleepModel. This can be done by creating methods in the 
-SleepPerWeek class that will get the fields of the SleepModel so that CreateGUI can access the fields of SleepModel
-without having an association relationship with SleepModel.
+between SleepPerWeek and CreateGUI and SleepPerWeek contains a list of SleepModel. This can be done by creating methods 
+in the SleepPerWeek class that will get the fields of the SleepModel so that CreateGUI can access the fields of 
+SleepModel without having an association relationship with SleepModel.

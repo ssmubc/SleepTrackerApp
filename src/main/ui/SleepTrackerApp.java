@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 
-// Represents the SleepPerWeek application
+// Represents the SleepPerWeek Tracker application
 public class SleepTrackerApp {
     private static final String JSON_STORE = "./data/weeklySleep.json";
     private Scanner input;

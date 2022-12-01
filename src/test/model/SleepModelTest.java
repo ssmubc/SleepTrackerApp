@@ -45,7 +45,7 @@ class SleepModelTest {
 
         for (Event event1 : eventlog) {
             event = event1;
-            System.out.println(event.getDescription());
+            //System.out.println(event.getDescription());
         }
         assert event != null;
         assertEquals("Added sleep entry to your log",event.getDescription());
@@ -59,37 +59,10 @@ class SleepModelTest {
 
         for (Event event1 : eventlog) {
             event = event1;
-            System.out.println(event.getDescription());
+            //System.out.println(event.getDescription());
         }
 
         assertEquals("Removed a sleep entry from your log", event.getDescription());
-    }
-
-    @Test
-    void testEquals() throws InterruptedException {
-        Event event1 = new Event("Added sleep entry to your log");
-        Event event2 = new Event("Added sleep entry to your log");
-        Event event3 = new Event("Random event");
-        String str = "Random event";
-        Event event4 = null;
-        assertTrue(event1.equals(event2) && event2.equals(event1));
-        assertFalse(event1.equals(event3));
-        assertFalse(event1.equals(str));
-        assertFalse(event1.equals(event4));
-        TimeUnit.SECONDS.sleep(1); // sleep for 1 second
-        Event event5 = new Event("Added sleep entry to your log");
-        assertFalse(event1.equals(event5));
-    }
-
-    @Test
-    void testHashCode() {
-        Event event1 = new Event("Added sleep entry to your log");
-        Event event2 = new Event("Added sleep entry to your log");
-        Event event3 = new Event("Random event");
-
-        assertTrue(event1.hashCode() == event2.hashCode());
-        assertFalse(event1.hashCode() == event3.hashCode());
-
     }
 
     @Test
@@ -98,13 +71,6 @@ class SleepModelTest {
                         EventLog.getInstance().iterator().next().getDescription(),
                 EventLog.getInstance().iterator().next().toString());
     }
-
-    @Test
-    void testGetDate() {
-        Event event1 = new Event("Added sleep entry to your log");
-        assertEquals(Calendar.getInstance().getTime(), event1.getDate());
-    }
-
 
 
     @Test
