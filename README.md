@@ -26,7 +26,7 @@ this, and so with this Sleep Pattern Tracker, I also want other students to bene
 daily sleep patterns.
 
 
-# How to run the program
+# How to run the program:
 
 - You can generate the first required event related to adding Xs to a Y by clicking on the button labelled 
 "Add your sleep entry". This button is on the menu page titled "Weekly SleepTracker for Students" You will be asked to
